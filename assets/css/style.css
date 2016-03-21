@@ -1,0 +1,156 @@
+body
+{
+	background-image : url('running.jpg');
+	background-size: 1280px 600px;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	color : white;
+	/*background-color: rgb(60,60,60);*/
+	font-family : "Verdana", cursive, sans-serif;
+}
+
+.corps{
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+
+a{
+	color: black;
+	text-decoration: none;
+}
+
+a:hover{
+	color: grey;
+}
+
+header{
+	background-color: rgb(0,0,0);
+	border-radius: 10px;
+	color: black;
+	position: fixed;
+	width:100%;
+	margin-left: -8px;
+	margin-right: -10px;
+	margin-top: -8px;
+}
+
+
+.logosite{
+	height: 85px;
+	width: 552px;
+}
+
+
+.connexion {
+	display: inline-block;
+}
+
+/*.connexion2{
+	display: inline-block;
+}*/
+
+.droite{
+	float: right;
+	margin-right: 40px;
+	margin-top: 15px;
+}
+
+input{
+	border-radius: 6px;
+}
+
+footer{
+	position: : relative;
+	bottom: 0;
+	background-color: rgb(255,255,255);
+	text-align: center;
+	border-radius: 10px;
+	margin-bottom: 0px;
+	margin-left: -8px;
+	margin-right: -8px;
+}
+
+footer a{
+	margin-right: 10px;
+	margin-left: 10px;
+}
+	
+
+
+.button {
+    background-color: rgb(0,0,0);
+    border: solid white 3px;
+    border-radius: 10px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+.test{
+	margin-left: 50px;
+}
+
+
+label{
+	width: 150px;
+	display: inline-block;
+	float:left;
+}
+
+.ligne1{
+	display: inline-block;
+	margin-top: 100px;
+	margin-bottom: 25px;
+	width: 100%;
+}
+
+.ligne2{
+	display: inline-block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	width: 100%;
+}
+
+.ligne3{
+	display: inline-block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	width: 100%;
+}
+
+.ligne4{
+	display: inline-block;
+	margin-top: 25px;
+	margin-bottom: 50px;
+	width: 100%;
+}
+
+
+.sportaccueil{
+	background-color: rgb(255,255,255);
+    border: solid black 3px;
+    border-radius: 10px;
+    color: black;
+    padding: 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.inscription{
+	margin-top: 100px;
+}
+
+
+
