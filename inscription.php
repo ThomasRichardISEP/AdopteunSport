@@ -3,45 +3,66 @@
     <head>
         <meta charset="utf-8" />
         <title>Inscription</title>
+
+        <!-- Feuilles de style -->
+        <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
         <link href='assets/css/style.css' rel='stylesheet' type='text/css' />
     </head>
 
     <body>
     	<header>
             <div class="container">
-                <div class="connexion"><a href="accueil.php"><img class="logosite" src="adopteunsport.png" /></a></div>
+                <div class="connexion"><a href="accueil.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
             </div>
         </header>
 
-
-        <div class="inscription">
-        	<lable for="prénom">Prénom :</label>
-			<input type="text" id="prenom" placeholder="Prénom"/><br><br>
-
-			<lable for="nom">Nom :</label>
-            <input type="text" id="nom" placeholder="nom"/><br><br>
-
-			<lable for="username">Identifiant :</label>
-            <input type="text" id="username" placeholder="Identifiant"/><br><br>
-
-            <lable for="mot_de_passe">Mot de pase :</label>
-            <input type="text" id="mot_de_passe" placeholder="Mot de passe"/><br><br>
-
-            <lable for="ville">Ville :</label>
-            <input type="text" id="ville" placeholder="Ville"/><br><br>
-
-            <lable for="age">Âge :</label>
-            <select id="age"></select><br><br>
-
+        <div class="formulaire">
+        <div class="coordonnees">
+        	<lable for="prénom">Prénom :</label><br><br>
+			<lable for="nom">Nom :</label><br><br>
+			<lable for="username">Identifiant :</label><br><br>
+            <lable for="mot_de_passe">Mot de pase :</label><br><br>
+            <lable for="ville">Ville :</label><br><br>
+            <lable for="age">Âge :</label><br><br>
+            
         </div>
 
+        <div class="barretexte">
+            <input type="text" id="prenom" placeholder="Ex: Thomas"/><br><br>
+            <input type="text" id="nom" placeholder="Ex: Richard"/><br><br>
+            <input type="text" id="username" placeholder="Ex: Thomasrichard"/><br><br>
+            <input type="text" id="mot_de_passe" placeholder="Mot de passe"/><br><br>
+            <input type="text" id="ville" placeholder="Ex: Paris"/><br><br>
+            <select id="age"></select><br><br>
+        </div>
+        </div>
 
         <footer>
-			<a href="https://www.google.fr">Google</a>
-			<a href="https://www.google.fr">Facebook</a>
-			<a href="https://www.google.fr">Twitter</a>
-			<a href="https://www.google.fr">Linked In</a>
-		</footer>
+            <div class="company bas">
+                <h3>Company</h3>
+                <a href="https://www.google.fr" class="lienfootercompany">A propos de nous</a>
+                <a href="cgu.php" class="lienfootercompany">CGU</a>
+            </div>
+
+            <div class="espace bas">
+            </div>
+
+            <div class="contact bas">
+                <h3>Contact</h3>
+                <a href="https://www.google.fr" class="lienfootercontact">Google</a>
+                <a href="https://www.facebook.com/Adopte-Un-Sport-1536807743279320/" class="lienfootercontact">Facebook</a>
+                <a href="https://www.google.fr" class="lienfootercontact">Twitter</a>
+                <a href="https://www.google.fr" class="lienfootercontact">Linked In</a>
+            </div>
+
+            <div class="espace bas">
+            </div>
+
+            <div class="adresse bas">
+                <h3>Adresse</h3>
+                <p>28 Rue Notre-Dame des Champs, Paris 75006.</p>
+            </div>
+        </footer>
 
     </body>
 </html>

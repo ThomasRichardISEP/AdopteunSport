@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8" />
         <title>Page 2</title>
+
+        <!-- Feuilles de style -->
+        <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
         <link href='assets/css/style.css' rel='stylesheet' type='text/css' />
     </head>
 

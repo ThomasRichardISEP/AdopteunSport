@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8" />
         <title>Connexion</title>
+
+        <!-- Feuilles de style -->
+        <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
         <link href='assets/css/style.css' rel='stylesheet' type='text/css' />
     </head>
 
@@ -11,7 +14,7 @@
 
     	<header>
             <div class="container">
-                <div class="connexion"><a href="accueil.php"><img class="logosite" src="adopteunsport.png" /></a></div>
+                <div class="connexion"><a href="accueil.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
             </div>
         </header>
 
@@ -33,11 +36,31 @@
 
 
     	<footer>
-			<a href="https://www.google.fr">Google</a>
-			<a href="https://www.google.fr">Facebook</a>
-			<a href="https://www.google.fr">Twitter</a>
-			<a href="https://www.google.fr">Linked In</a>
-		</footer>
+            <div class="company bas">
+                <h3>Company</h3>
+                <a href="https://www.google.fr" class="lienfootercompany">A propos de nous</a>
+                <a href="cgu.php" class="lienfootercompany">CGU</a>
+            </div>
+
+            <div class="espace bas">
+            </div>
+
+            <div class="contact bas">
+                <h3>Contact</h3>
+                <a href="https://www.google.fr" class="lienfootercontact">Google</a>
+                <a href="https://www.facebook.com/Adopte-Un-Sport-1536807743279320/" class="lienfootercontact">Facebook</a>
+                <a href="https://www.google.fr" class="lienfootercontact">Twitter</a>
+                <a href="https://www.google.fr" class="lienfootercontact">Linked In</a>
+            </div>
+
+            <div class="espace bas">
+            </div>
+
+            <div class="adresse bas">
+                <h3>Adresse</h3>
+                <p>28 Rue Notre-Dame des Champs, Paris 75006.</p>
+            </div>
+        </footer>
 
     </body>
 </html>

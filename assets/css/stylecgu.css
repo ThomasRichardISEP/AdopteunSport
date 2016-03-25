@@ -1,0 +1,18 @@
+body
+{
+	background-color: white;
+	background-size: 1280px 600px;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	color : black;
+	font-family : "Verdana", cursive, sans-serif;
+}
+
+.cgu{
+	display: inline-block;
+	margin-top: 150px;
+}
+
+p{
+	text-indent: 30px;
+}

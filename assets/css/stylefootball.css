@@ -1,19 +1,11 @@
 body {
-	background-image : url('Images/football.jpg');
+	background-image : url('Images/terrainfoot.jpg');
 	background-size: 1280px 600px;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	color : black;
 	/*background-color: rgb(60,60,60);*/
-	font-family : "Comic Sans MS", cursive, sans-serif;
-}
-
-
-header{
-	background-color: white;
-	border-radius: 10px;
-	color: black;
-	width:100%;
+	font-family : "Verdana", cursive, sans-serif;
 }
 
 
@@ -23,48 +15,84 @@ a{
 }
 
 a:hover{
-	color:red;
+	color: grey;
 }
 
 
-.logosite{
-	height: 85px;
-	width: 552px;
-}
-
-
-.connexion {
+.ligne1{
 	display: inline-block;
-}
-
-
-.droite{
-	float: right;
-	margin-right: 40px;
-	margin-top: 15px;
-}
-
-
-footer{
-	position: : relative;
-	bottom: 0;
-	background-color: grey;
+	margin-top: 200px;
+	margin-bottom: 25px;
+	width: 100%;
 	text-align: center;
-	border-radius: 10px;
-	margin-bottom: 0px;
 }
 
 
-.button {
-    background-color: rgb(255,255,255);
+.ligne2{
+	display: inline-block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	width: 100%;
+	text-align: center;
+}
+
+
+.ligne3{
+	display: inline-block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	width: 100%;
+	text-align: center;
+}
+
+
+.ligne4{
+	display: inline-block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	width: 100%;
+	text-align: center;
+}
+
+
+.ligne5{
+	display: inline-block;
+	margin-top: 25px;
+	margin-bottom: 50px;
+	width: 100%;
+	text-align: center;
+}
+
+
+.clubfoot{
     border: solid black 3px;
     border-radius: 10px;
-    color: black;
-    padding: 15px 32px;
+    color: orange;
+    padding: 40px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
+    margin-right: 2%;
+    margin-left: 2%;
+    height: 30px;
+    width: 5%;
+}
+
+
+.clubfoot:hover{
+	color:blue;
+}
+
+
+.psg{
+	background-image: url('Images/clubfoot/PSG.png');
+	background-size:100% 100%;
+}
+
+
+.psg:hover{
+	background-image: url('Images/foot.jpg');
+	background-size:100% 100%;
 }
