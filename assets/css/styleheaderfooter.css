@@ -1,33 +1,40 @@
 .container{
 	background-color: rgb(0,0,0);
-	/*border-radius: 10px;*/
+    opacity: 1;
+	border-radius: 0px;
 	color: black;
 	position: fixed;
 	width:100%;
+    height: 10%;
 	margin-left: -8px;
 	margin-right: -10px;
 	margin-top: -8px;
+    display: block;
 }
 
 
 .menu{
 	background-color: rgb(60,60,60);
+    opacity: 0.9;
 	position: fixed;
-	margin-top: 81px;
+	margin-top: 4%;
 	width:100%;
-	margin-left: -8px;
+    height: 10%;
+    margin-left: -8px;
 	text-align: center;
-}
-
-
-header{
     display: block;
 }
 
+/*
+.haut{
+    display: block;
+}*/
+
 
 .logosite{
-	height: 85px;
-	width: 552px;
+	height: 42px;
+	width: 276px;
+    margin-top: 10px;   
 }
 
 
@@ -38,32 +45,36 @@ header{
 
 .droite{
 	float: right;
-	margin-right: 40px;
-	margin-top: 15px;
+}
+
+
+.lienpseudo{
+    color: white;
 }
 
 
 .button {
     background-color: rgb(0,0,0);
-    border: solid white 3px;
+    border: solid white 2px;
     border-radius: 10px;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 12px;
+    margin: 10px 4px;
     cursor: pointer;
 }
 
 
 .button2 {
     background-color: rgb(60,60,60);
-    border: solid white 3px;
+    border: solid white 1px;
     border-radius: 10px;
     color: white;
-    padding: 15px 32px;
+    /*padding: 15px 32px;*/
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -76,6 +87,7 @@ header{
 footer{
     position: relative;
     background-color: rgb(0,0,0);
+    opacity: 0.8;
     color:white;
     text-align: center;
     border-radius: 10px;
@@ -121,6 +133,52 @@ footer h3{
 }
 
 
-.lienfootercontact{
-    display: block;
+.rsociaux{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+}
+
+
+.mail{
+    background-image: url('Images/mailnb.png');
+    background-size: 100%;
+}
+
+
+.mail:hover{
+    background-image: url('Images/mail.png');
+}
+
+
+.fb{
+    background-image: url('Images/fbnb1.png');
+    background-size: 100%;
+}
+
+
+.fb:hover{
+    background-image: url('Images/fb1.png');
+}
+
+
+.twitter{
+    background-image: url('Images/twitternb.png');
+    background-size: 100%;
+}
+
+
+.twitter:hover{
+    background-image: url('Images/twitter.png');
+}
+
+
+.linkedin{
+    background-image: url('Images/linkedinnb.png');
+    background-size: 100%;
+}
+
+
+.linkedin:hover{
+    background-image: url('Images/linkedin.png');
 }

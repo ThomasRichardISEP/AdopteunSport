@@ -3,14 +3,13 @@
 	<head>
 		<meta charset='utf8' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Football</title>
+		<title>Forum</title>
 		
 		<!-- Feuille de style -->
 		<link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
-		<link href='assets/css/stylefootball.css' rel='stylesheet' type='text/css' />
-		
-	</head>
+		<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
 
+	</head>
 	<body>
 
 		<header>
@@ -45,52 +44,67 @@
 		</header>
 		
 
-		<div class="corps">
-			<div class="ligne1">
-				<a href="football.php" class="clubfoot psg">PSG</a>
-				<a href="inscription.php" class="clubfoot losc">LOSC</a>
-				<a href="inscription.php" class="clubfoot asse">ASSE</a>
-				<a href="inscription.php" class="clubfoot monaco">Monaco</a>
-			</div><br>	
+		<div class="forum">
 
+			<?php
+				if (isset($_SESSION['Pseudo'])) {
+				?>
+					<form action="forum_post.php" method="post" class="forumformulaire">
+			        	<p>
+			        		<label for="Contenu">Message</label> :  <input type="text" name="Contenu" id="Contenu" placeholder="Entrez votre message" /><br />
+					        <input type="submit" value="Envoyer" id="valider" />
+						</p>
+			    	</form>
+	    	<?php
+	    		}
+	    	?>
 
-			<div class="ligne2">
-				<a href="inscription.php" class="clubfoot">Tennis</a>
-				<a href="inscription.php" class="clubfoot">Badminton</a>
-				<a href="inscription.php" class="clubfoot">Pingpong</a>
-				<a href="inscription.php" class="clubfoot">Basket</a>
-			</div><br>
+			<?php
+			try
+			{
+				$bdd = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+	        	die('Erreur : '.$e->getMessage());
+			}
+
+			// Récupération des messages
+			$reponse = $bdd->query('SELECT Pseudo_membre_inscrit, Contenu, Date_message, Heure_message FROM messages ORDER BY Id_message DESC ');
+
+			// Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
+			while ($donnees = $reponse->fetch())
+			{ ?>
+
+				<div class="postsforum">
+				<div class="auteur caseforum">
+					<?php 
+					echo $donnees['Pseudo_membre_inscrit'] . '<br/>' . 'le ';
+					echo $donnees['Date_message'] . ' à ';
+					echo $donnees['Heure_message'];
+					?>
+				</div>
+				<div class="msg caseforum">
+					<?php
+					echo $donnees['Contenu'] . '<br /><br />';
+					?>
+				</div>
+			</div>
 			
+			<?php
+			}
 
-			<div class="ligne3">
-				<a href="inscription.php" class="clubfoot">Cyclisme</a>
-				<a href="inscription.php" class="clubfoot">Natation</a>
-				<a href="inscription.php" class="clubfoot">Escalade</a>
-				<a href="inscription.php" class="clubfoot">Basket</a>
-			</div>
+			$reponse->closeCursor();
 
+			?>
 
-			<div class="ligne4">
-				<a href="inscription.php" class="clubfoot">Curling</a>
-				<a href="inscription.php" class="clubfoot">Plongeon</a>
-				<a href="inscription.php" class="clubfoot">Tir à l'arc</a>
-				<a href="inscription.php" class="clubfoot">Basket</a>
-			</div>
-
-
-			<div class="ligne5">
-				<a href="inscription.php" class="clubfoot">Curling</a>
-				<a href="inscription.php" class="clubfoot">Plongeon</a>
-				<a href="inscription.php" class="clubfoot">Tir à l'arc</a>
-				<a href="inscription.php" class="clubfoot">Basket</a>
-			</div>
 		</div>
 
 
 		<footer>
 			<div class="company bas">
 				<h3>Company</h3>
-				<a href="https://www.google.fr" class="lienfootercompany">A propos de nous</a>
+				<a href="groupe6c.php" class="lienfootercompany">A propos de nous</a>
 				<a href="cgu.php" class="lienfootercompany">CGU</a><br/>
 				<a href="accueilen.php" class="lienfootercompany">English version</a>
 			</div>
@@ -115,5 +129,11 @@
 			</div>
 		</footer>
 
-	</body>
+    </body>
 </html>
+
+<!--
+echo $donnees['Pseudo_membre_inscrit'] . ' , le ';
+		echo $donnees['Date_message'] . ' à ';
+		echo $donnees['Heure_message'] . ' :' . '<br />';
+		echo $donnees['Contenu'] . '<br /><br />'; -->

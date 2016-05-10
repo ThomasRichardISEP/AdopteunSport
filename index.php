@@ -3,14 +3,13 @@
 	<head>
 		<meta charset='utf8' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Football</title>
+		<title>Accueil</title>
 		
 		<!-- Feuille de style -->
 		<link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
-		<link href='assets/css/stylefootball.css' rel='stylesheet' type='text/css' />
+		<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
 		
 	</head>
-
 	<body>
 
 		<header>
@@ -43,54 +42,19 @@
 				<a href="faq.php" class="button2">Aide</a>
 			</div> 			
 		</header>
-		
-
-		<div class="corps">
-			<div class="ligne1">
-				<a href="football.php" class="clubfoot psg">PSG</a>
-				<a href="inscription.php" class="clubfoot losc">LOSC</a>
-				<a href="inscription.php" class="clubfoot asse">ASSE</a>
-				<a href="inscription.php" class="clubfoot monaco">Monaco</a>
-			</div><br>	
 
 
-			<div class="ligne2">
-				<a href="inscription.php" class="clubfoot">Tennis</a>
-				<a href="inscription.php" class="clubfoot">Badminton</a>
-				<a href="inscription.php" class="clubfoot">Pingpong</a>
-				<a href="inscription.php" class="clubfoot">Basket</a>
-			</div><br>
-			
 
-			<div class="ligne3">
-				<a href="inscription.php" class="clubfoot">Cyclisme</a>
-				<a href="inscription.php" class="clubfoot">Natation</a>
-				<a href="inscription.php" class="clubfoot">Escalade</a>
-				<a href="inscription.php" class="clubfoot">Basket</a>
-			</div>
-
-
-			<div class="ligne4">
-				<a href="inscription.php" class="clubfoot">Curling</a>
-				<a href="inscription.php" class="clubfoot">Plongeon</a>
-				<a href="inscription.php" class="clubfoot">Tir à l'arc</a>
-				<a href="inscription.php" class="clubfoot">Basket</a>
-			</div>
-
-
-			<div class="ligne5">
-				<a href="inscription.php" class="clubfoot">Curling</a>
-				<a href="inscription.php" class="clubfoot">Plongeon</a>
-				<a href="inscription.php" class="clubfoot">Tir à l'arc</a>
-				<a href="inscription.php" class="clubfoot">Basket</a>
-			</div>
+		<div class="videodiv">
+			<video class="video" src="adopteunsport.mp4" controls></video>
 		</div>
+
 
 
 		<footer>
 			<div class="company bas">
 				<h3>Company</h3>
-				<a href="https://www.google.fr" class="lienfootercompany">A propos de nous</a>
+				<a href="groupe6c.php" class="lienfootercompany">A propos de nous</a>
 				<a href="cgu.php" class="lienfootercompany">CGU</a><br/>
 				<a href="accueilen.php" class="lienfootercompany">English version</a>
 			</div>
@@ -100,7 +64,7 @@
 
 			<div class="contact bas">
 				<h3>Contact</h3>
-				<a href="https://www.google.fr" class="rsociaux mail"></a>
+				<a href="mailto:tho-richard@sfr.fr" class="rsociaux mail"></a>
 				<a href="https://www.facebook.com" class="rsociaux fb"></a>
 				<a href="https://www.google.fr" class="rsociaux twitter"></a>
 				<a href="https://www.google.fr" class="rsociaux linkedin"></a>
@@ -114,6 +78,39 @@
 				<p>28 Rue Notre-Dame des Champs, Paris 75006.</p>
 			</div>
 		</footer>
-
-	</body>
+	</body>	
 </html>
+
+
+<!--
+		<div class="corps">
+			
+			<div class="ligne1">
+				<a href="football.php" class="sportaccueil foot">Football</a>
+				<a href="inscription.php" class="sportaccueil rugby">Rugby</a>
+				<a href="inscription.php" class="sportaccueil basket">Basket</a>
+			</div><br>	
+
+
+			<div class="ligne2">
+				<a href="inscription.php" class="sportaccueil tennis">Tennis</a>
+				<a href="inscription.php" class="sportaccueil badminton">Badminton</a>
+				<a href="inscription.php" class="sportaccueil pingpong">Pingpong</a>
+			</div><br>
+			
+
+			<div class="ligne3">
+				<a href="inscription.php" class="sportaccueil">Cyclisme</a>
+				<a href="inscription.php" class="sportaccueil">Natation</a>
+				<a href="inscription.php" class="sportaccueil">Escalade</a>
+			</div>
+
+
+			<div class="ligne4">
+				<a href="inscription.php" class="sportaccueil">Curling</a>
+				<a href="inscription.php" class="sportaccueil">Plongeon</a>
+				<a href="inscription.php" class="sportaccueil">Tir à l'arc</a>
+			</div>
+			
+		</div>
+-->

@@ -1,18 +1,14 @@
+/* Style commun */
 body
 {
 	background-image : url('Images/course.jpeg');
-	background-size: 1280px 600px;
+	/*background-color: rgb(100,100,100);*/
+	background-size: 100%;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	display: block;
 	color : black;
 	font-family : "Verdana", cursive, sans-serif;
-}
-
-
-.corps{
-	margin-left: 50px;
-	margin-right: 50px;
 }
 
 
@@ -37,16 +33,358 @@ input{
 }
 
 
-label{
-	width: 150px;
-	display: inline-block;
-	float:left;
+.coordonnees{
+	margin-top: 100px;
 }
 
 
+/* Page Accueil */
+.videodiv{
+	display: inline-block;
+	margin-top:9%;
+	margin-bottom:3%;
+	margin-left:15%;
+}
+
+
+.video{
+	border-radius: 10px;
+}
+
+
+/* Page Anglais */
+.maintenance{
+	padding-top: 9%;
+	margin-bottom: 17%;
+}
+
+
+/* Page Inscription */
+.inscriptiondiv{
+	display: inline-block;
+	margin-top: 6%;
+	margin-bottom: 3%;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	text-align: center;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(255,250,240);
+}
+
+
+.liencgu{
+	text-decoration: underline;
+}
+
+
+/* Page Connexion */
+.connexiondiv{
+	display: inline-block;
+	margin-top: 6%;
+	margin-bottom: 14%;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	text-align: center;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(255,250,240);
+}
+
+
+/* Page Membre */
+.profil{
+	display:inline-block;
+	margin:10%;
+	margin-bottom: 3%;
+	width: 80%;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(255,250,240);
+}
+
+
+.profilcolonne{
+	display: inline-block;
+}
+
+
+.info1{
+	display: block;
+	text-indent: 30px;
+}
+
+
+.profilphoto{
+	float: right;
+	height: 300px;
+}
+
+
+/* Page Messagerie */
+.messagerie{
+	display:inline-block;
+	margin-top:10%;
+	margin-bottom: 3%;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+
+.messagerieformulaire{
+	text-align: center;
+	border: solid black 2px;
+	background-color: rgb(255,250,240);
+	border-radius: 10px;
+}
+
+
+.casemessagerie{
+	display: inline-block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+
+.postsmessagerie{
+	background-color: rgb(255,250,240);
+	border: solid black 2px;
+	border-radius: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+/* Page Clubs */
+.club{
+	display: inline-block;
+	margin-top: 10%;
+	margin-bottom: 3%;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+
+.clubformulaire{
+	text-align: center;
+	border: solid black 2px;
+	background-color: rgb(255,250,240);
+	border-radius: 10px;
+}
+
+
+.clubville{
+	background-color: rgb(255,250,240);
+	border: solid black 2px;
+	border-radius: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
+}
+
+
+/* Page Groupes */
+.groupe{
+	display: inline-block;
+	margin-top: 10%;
+	margin-bottom: 3%;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+
+.groupeformulaire{
+	text-align: center;
+	border: solid black 2px;
+	background-color: rgb(255,250,240);
+	border-radius: 10px;
+}
+
+
+.groupestrouves{
+	background-color: rgb(255,250,240);
+	border: solid black 2px;
+	border-radius: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
+}
+
+
+/* Page CGU */
+.cgu{
+	display: inline-block;
+	margin-top: 10%;
+	margin-bottom: 3%;
+	margin-left: 5%;
+	margin-right: 5%;
+	background-color: grey;
+	opacity: 1;
+	border-radius: 10px;
+}
+
+
+.articlecgu{
+	text-indent: 30px;
+}
+
+
+/* Page Groupe 6C */
+.groupe6c{
+	display:inline-block;
+	margin-top:10%;
+	margin-bottom:2%;
+	margin-left: 5%;
+	margin-right: 5%;
+	color:black;
+	background-color:grey;
+	border-radius:10px;
+}
+
+
+/* Page Forum */
+.forum{
+	margin-top: 10%;
+	width: 100%;
+	display: inline-block;
+}
+
+
+.forumformulaire{
+	text-align: center;
+	border: solid black 2px;
+	background-color: rgb(255,250,240);
+	border-radius: 10px;
+}
+
+
+.auteur{
+	vertical-align: text-bottom;
+	padding-right: 20px;
+	padding-left: 20px;
+	font-size: 14px;
+}
+
+
+.msg{
+	padding-right: 5px;
+	padding-left: 5px;
+	border-left: solid black 2px;
+}
+
+
+.caseforum{
+	display: inline-block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+
+.postsforum{
+	background-color: rgb(255,250,240);
+	border: solid black 2px;
+	border-radius: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+/* Page FAQ */
+.faq{
+	margin-top: 10%;
+	width: 100%;
+	display: inline-block;
+}
+
+
+.faqformulaire{
+	text-align: center;
+	border: solid black 2px;
+	background-color: rgb(255,250,240);
+	border-radius: 10px;
+}
+
+
+.posts{
+	background-color: rgb(255,250,240);
+	border: solid black 2px;
+	border-radius: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+.question{
+	/*border-right: solid black 2px;*/
+	vertical-align: text-bottom;
+	padding-right: 20px;
+	padding-left: 20px;
+	font-size: 14px;
+}
+
+
+.reponse{
+	padding-right: 5px;
+	padding-left: 5px;
+	border-top: solid black 2px;
+}
+
+
+.case{
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+
+#valider {
+    background-color: rgb(60,60,60);
+    border: solid black 1px;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px 8px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+
+#valider:hover{
+	color: grey;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
 .ligne1{
 	display: inline-block;
-	margin-top: 200px;
+	margin-top: 130px;
 	margin-bottom: 25px;
 	width: 100%;
 	text-align: center;
@@ -174,24 +512,4 @@ label{
 }
 
 
-.inscription{
-	margin-top: 100px;
-}
-
-
-.faq{
-	color: black;
-	display: inline-block;
-	margin-top: 200px;
-}
-
-
-.formulaire{
-	display: inline-block;
-}
-
-
-.coordonnees{
-	margin-top: 100px;
-}
-
+*/

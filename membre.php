@@ -2,14 +2,21 @@
 <html>
 	<head>
 		<meta charset='utf8' />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Aide</title>
-		
-		<!-- Feuille de style -->
-		<link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
-		<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
-		
+		<title>Espace membre</title>
+		<!-- Feuilles de style -->
+	    <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
+    	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
 	</head>
+
+	<?php
+	session_start();
+	if (!isset($_SESSION['Pseudo'])) {  
+		header ('Location: index.php');
+		exit();
+	}
+	?>
+
+
 	<body>
 
 		<header>
@@ -17,7 +24,6 @@
 				<div class="connexion element"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
 				<div class="connexion droite element">
 					<?php
-						session_start();
 						if (!isset($_SESSION['Pseudo'])) {
 							?>
 							<a href="inscription.php" class="button">Inscription</a>
@@ -44,59 +50,16 @@
 		</header>
 
 
-		<div class="faq">
-
-			<?php
-				if (isset($_SESSION['Pseudo'])) {
-				?>
-					<form action="faq_post.php" method="post" class="faqformulaire">
-		        		<p>
-		        			<label for="Question">Question</label> : <input type="text" name="Question" id="Question" placeholder="Entrez votre question" /><br />
-		        			<label for="Reponse">Réponse</label> :  <input type="text" name="Reponse" id="Reponse" placeholder="Entrez votre réponse" /><br />
-				     	   <input type="submit" value="Envoyer" id="valider" />
-						</p>
-		    		</form>
-    		<?php
-	    		}
-	    	?>
-			
-			<?php
-		try
-		{
-			$bdd = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		}
-		catch(Exception $e)
-		{
-        	die('Erreur : '.$e->getMessage());
-		}
-
-		// Récupération des 10 derniers messages
-		$reponse = $bdd->query('SELECT Question, Reponse FROM faq ORDER BY Id');
-
-		// Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
-		while ($donnees = $reponse->fetch())
-		{ ?>
-
-			<div class="posts">
-			<div class="question case">
-				<?php 
-				echo $donnees['Question'];
-				?>
+		<div class="profil">
+			<div class="profilcolonne">
+				<p class="profilnom info1">Bonjour <?php echo htmlentities(trim($_SESSION['Prenom']));?> <?php echo htmlentities(trim($_SESSION['Nom'])); ?> </p>
+				<p class="profilpseudo info1">Votre Pseudo est <?php echo htmlentities(trim($_SESSION['Pseudo'])); ?>! </p>
+				<p class="profilnaissance info1">Vous êtes né(e) le <?php echo htmlentities(trim($_SESSION['Date_naissance'])); ?>. </p>
+				<p class="profilmail info1">Votre mail est <?php echo htmlentities(trim($_SESSION['Mail'])); ?>. </p>
+				<p class="profiladresse info1">Vous habitez au <?php echo htmlentities(trim($_SESSION['Adresse'])); ?>. </p><br />
+				<a href="messagerie.php" class="lienmessagerie info1">Lien vers votre messagerie Messagerie</a>
 			</div>
-			<div class="reponse case">
-				<?php
-				echo $donnees['Reponse'] . '<br /><br />';
-				?>
-			</div>
-		</div>
-		
-		<?php
-		}
-
-		$reponse->closeCursor();
-
-		?>	
-
+			<img class="profilphoto profilcolonne" src=<?php echo htmlentities(trim($_SESSION['Photo'])); ?> />
 		</div>
 
 
@@ -113,7 +76,7 @@
 
 			<div class="contact bas">
 				<h3>Contact</h3>
-				<a href="https://www.google.fr" class="rsociaux mail"></a>
+				<a href="mailto:tho-richard@sfr.fr" class="rsociaux mail"></a>
 				<a href="https://www.facebook.com" class="rsociaux fb"></a>
 				<a href="https://www.google.fr" class="rsociaux twitter"></a>
 				<a href="https://www.google.fr" class="rsociaux linkedin"></a>
