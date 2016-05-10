@@ -206,6 +206,31 @@ input{
 	border: solid black 2px;
 	background-color: rgb(255,250,240);
 	border-radius: 10px;
+	display: inline-block;
+	width: 45%;
+	vertical-align: middle;
+}
+
+
+.groupeformulaire2{
+	text-align: center;
+	border: solid black 2px;
+	background-color: rgb(255,250,240);
+	border-radius: 10px;
+	display: inline-block;
+	width: 100%;
+	vertical-align: middle;
+}
+
+
+.formulairecreergroupe{
+	text-align: center;
+	border: solid black 2px;
+	background-color: rgb(255,250,240);
+	border-radius: 10px;
+	display: inline-block;
+	width: 45%;
+	vertical-align: middle;
 }
 
 
@@ -219,6 +244,27 @@ input{
 	margin-left: 25%;
 	margin-right: 25%;
 	text-align: center;
+}
+
+
+#creer {
+    background-color: rgb(60,60,60);
+    border: solid black 1px;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px 8px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+
+#creer:hover{
+	color: grey;
 }
 
 
