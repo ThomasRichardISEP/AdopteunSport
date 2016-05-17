@@ -45,20 +45,6 @@
 
 
 		<div class="faq">
-
-			<?php
-				if (isset($_SESSION['Pseudo'])) {
-				?>
-					<form action="faq_post.php" method="post" class="faqformulaire">
-		        		<p>
-		        			<label for="Question">Question</label> : <input type="text" name="Question" id="Question" placeholder="Entrez votre question" /><br />
-		        			<label for="Reponse">Réponse</label> :  <input type="text" name="Reponse" id="Reponse" placeholder="Entrez votre réponse" /><br />
-				     	   <input type="submit" value="Envoyer" id="valider" />
-						</p>
-		    		</form>
-    		<?php
-	    		}
-	    	?>
 			
 			<?php
 		try

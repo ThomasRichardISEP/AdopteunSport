@@ -46,7 +46,7 @@
             if ($data[0] == 1) {
                 session_start();
 
-                $sql1 = 'SELECT Nom, Prenom, Photo, Date_naissance, Mail, Adresse FROM membre_inscrit WHERE Pseudo="'.$_POST['login'].'"';
+                $sql1 = 'SELECT Nom, Prenom, Photo, Date_naissance, Mail, Adresse, Administrateur FROM membre_inscrit WHERE Pseudo="'.$_POST['login'].'"';
                 $req1 = $base->query($sql1);
                 $data1 = $req1->fetch();
 
@@ -57,7 +57,12 @@
                 $_SESSION['Date_naissance'] = $data1['Date_naissance'];
                 $_SESSION['Mail'] = $data1['Mail'];
                 $_SESSION['Adresse'] = $data1['Adresse'];
-                header('Location: membre.php');
+                    if ($data1['Administrateur'] == 0){
+                        header('Location: membre.php');
+                    }
+                    else if ($data1['Administrateur'] == 1){
+                        header('Location: administrateur.php');
+                    }
                 exit();
             }
             // si on ne trouve aucune réponse, le visiteur s'est trompé soit dans son login, soit dans son mot de passe
@@ -78,7 +83,7 @@
 
         <div class="connexiondiv">
         <form action="pageconnection.php" method="post">
-			<h3>Connexion à l'espace membre :</h3>
+			<h3>Connexion à l'espace membre (ou administrateur) :</h3>
             <form action="index.php" method="post">
             Pseudo : <input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"><br />
             Mot de passe : <input type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass'])); ?>"><br />
@@ -123,15 +128,3 @@
 
     </body>
 </html>
-
-
-<!--
-
-if ($data[0] == 1) {
-                session_start();
-                $_SESSION['Pseudo'] = $_POST['login'];
-                $_SESSION['Nom'] = $data['Nom'];
-                $_SESSION['Prenom'] = $data['Prenom'];
-                header('Location: membre.php');
-                exit();
-            }-->

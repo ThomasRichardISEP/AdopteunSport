@@ -144,7 +144,7 @@
 					{ ?>
 
 						<div class="groupestrouves">
-						<a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<br/><a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
 						echo $donnees['Zone_geographique']. '<br/>'. '<br/>';
@@ -166,7 +166,7 @@
 					{ ?>
 
 						<div class="groupestrouves">
-						<a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<br/><a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
 						echo $donnees['Zone_geographique']. '<br/>'. '<br/>';
@@ -188,7 +188,7 @@
 					{ ?>
 
 						<div class="groupestrouves">
-						<a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<br/><a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
 						echo $donnees['Zone_geographique']. '<br/>'. '<br/>';
@@ -202,6 +202,40 @@
 
 				}
 
+			}
+
+			else{
+
+				try
+					{
+						$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+					}
+					catch(Exception $e)
+					{
+	        			die('Erreur : '.$e->getMessage());
+					}
+
+					?>
+					<h3 class="grouperecent">Groupes récemment ajoutés</h3>
+					<?php
+
+					$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique FROM groupe ORDER BY Id DESC LIMIT 0, 3');
+
+					while ($donnees = $reponse->fetch())
+					{ ?>
+
+						<div class="groupestrouves">
+						<br/><a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<?php 
+						echo $donnees['Descriptif'] . '<br/>';
+						echo $donnees['Zone_geographique']. '<br/>'. '<br/>';
+						?>
+						</div>
+					
+					<?php
+					}
+
+					$reponse->closeCursor();
 			}	
 			?>
 

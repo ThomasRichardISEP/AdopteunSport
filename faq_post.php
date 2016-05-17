@@ -14,5 +14,5 @@ $req = $bdd->prepare('INSERT INTO faq (Question, Reponse) VALUES(?, ?)');
 $req->execute(array($_POST['Question'], $_POST['Reponse']));
 
 // Redirection du visiteur vers la page du minichat
-header('Location: faq.php');
+header('Location: administrateur.php');
 ?>
