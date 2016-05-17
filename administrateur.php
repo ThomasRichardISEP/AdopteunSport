@@ -75,6 +75,12 @@
 
 		?>
 
+		<div class="optionsadmin">
+			<a href="www.google.fr" class="button2">Gestion Membres</a>
+			<a href="www.google.fr" class="button2">Gestion Forum</a>
+			<a href="www.google.fr" class="button2">Gestion FAQ</a>
+		</div>
+
 		<div class="faqadmindiv">
 			<h3>Ajouter une FAQ</h3>
 			<form action="faq_post.php" method="post" class="faqformulaire">
