@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Connexion membre</title>
+        <title>Connexion administrateur</title>
 
         <!-- Feuilles de style -->
         <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
@@ -83,12 +83,11 @@
 
         <div class="connexiondiv">
         <form action="pageconnection.php" method="post">
-			<h3>Connexion à l'espace membre :</h3>
+			<h3>Connexion à l'espace administrateur :</h3>
             <form action="index.php" method="post">
             Pseudo : <input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"><br />
             Mot de passe : <input type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass'])); ?>"><br />
-            <input type="submit" name="connecter" value="Connecter" class="button2"><br/><br/>
-            <a href="pageconnexionadmin.php"> -> Connexion administrateur</a>
+            <input type="submit" name="connecter" value="Connecter" class="button2">
             </form>
 
             <?php
