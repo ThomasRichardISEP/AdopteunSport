@@ -84,27 +84,42 @@
 				<div class="groupeformulaire">
 					<form action="groupes.php" method="post">
 						<h3>Rechercher un groupe</h3>
-			        	<p>
-			        		<label for="sport">Sport</label> : <input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
-			        		<label for="ville">Ville</label> : <input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
-					        <input type="submit" name="valider" value="Valider" id="valider">
-						</p>
+			        	<div class="partie colonnegauche">
+			        		Sport :<br/>
+			        		Ville :
+			        	</div>
+			        	<div class="partie colonnedroite">
+			        		<input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
+			        		<input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
+			        	</div>
+					    <input type="submit" name="valider" value="Valider" id="valider">
 			    	</form>
     			</div>
+
 				<div class="formulairecreergroupe">
 					<form action="groupes.php" method="post">
 						<h3>Créer un groupe</h3>
-			        	<p>
-			        		<label for="nomgroupe">Nom du groupe</label> : <input type="text" name="nomgroupe" placeholder="Entrez un nom" value="<?php if (isset($_POST['nomgroupe'])) echo htmlentities(trim($_POST['nomgroupe'])); ?>"/><br />
-			        		<label for="choixsport">Sport</label> : <input type="text" name="choixsport" placeholder="Entrez un sport" value="<?php if (isset($_POST['choixsport'])) echo htmlentities(trim($_POST['choixsport'])); ?>"/><br />
-			        		<label for="choixville">Ville</label> : <input type="text" name="choixville" placeholder="Entrez une ville" value="<?php if (isset($_POST['choixville'])) echo htmlentities(trim($_POST['choixville'])); ?>"/><br />
-			        		<label for="descriptif">Desriptif</label> : <input type="text" name="descriptif" placeholder="Entrez un descriptif" value="<?php if (isset($_POST['descriptif'])) echo htmlentities(trim($_POST['descriptif'])); ?>"/><br />
-			        		<label for="nbmembres">Nombre de membres</label> : <input type="text" name="nbmembres" placeholder="Entrez un nombre de membres" value="<?php if (isset($_POST['nbmembres'])) echo htmlentities(trim($_POST['nbmembres'])); ?>"/><br />
-			        		<label for="photo">Photo</label> : <input type="text" name="photo" placeholder="Entrez une photo" value="<?php if (isset($_POST['photo'])) echo htmlentities(trim($_POST['photo'])); ?>"/><br />
+			        	<div class="partie colonnegauche">
+			        		Nom du groupe :<br/>
+			        		Sport :<br/>
+			        		Ville :<br/>
+			        		Descriptif :<br/>
+			        		Nb de membres :<br/>
+			        		Photo :
+			        	</div>
+			        	<div class="partie colonnedroite">
+			        		<input type="text" name="nomgroupe" placeholder="Entrez un nom" value="<?php if (isset($_POST['nomgroupe'])) echo htmlentities(trim($_POST['nomgroupe'])); ?>"/><br />
+			        		<input type="text" name="choixsport" placeholder="Entrez un sport" value="<?php if (isset($_POST['choixsport'])) echo htmlentities(trim($_POST['choixsport'])); ?>"/><br />
+			        		<input type="text" name="choixville" placeholder="Entrez une ville" value="<?php if (isset($_POST['choixville'])) echo htmlentities(trim($_POST['choixville'])); ?>"/><br />
+			        		<input type="text" name="descriptif" placeholder="Entrez un descriptif" value="<?php if (isset($_POST['descriptif'])) echo htmlentities(trim($_POST['descriptif'])); ?>"/><br />
+			        		<input type="text" name="nbmembres" placeholder="Entrez un nombre de membres" value="<?php if (isset($_POST['nbmembres'])) echo htmlentities(trim($_POST['nbmembres'])); ?>"/><br />
+			        		<input type="text" name="photo" placeholder="Entrez une photo" value="<?php if (isset($_POST['photo'])) echo htmlentities(trim($_POST['photo'])); ?>"/><br />
+			        	</div>			        		
 					        <input type="submit" name="creer" value="Créer" id="creer">
-						</p>
+						
 			    	</form>
     			</div>
+
 			<?php
 			}
 
@@ -113,11 +128,15 @@
 				<div class="groupeformulaire2">
 					<form action="groupes.php" method="post">
 						<h3>Rechercher un groupe</h3>
-			        	<p>
-			        		<label for="sport">Sport</label> : <input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
-			        		<label for="ville">Ville</label> : <input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
-					        <input type="submit" name="valider" value="Valider" id="valider">
-						</p>
+			        	<div class="partie colonnegauche">
+			        		Sport :<br/>
+			        		Ville :
+			        	</div>
+			        	<div class="partie colonnedroite">
+			        		<input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
+			        		<input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
+			        	</div>
+					    <input type="submit" name="valider" value="Valider" id="valider">
 			    	</form>
     			</div>
     		<?php
@@ -144,11 +163,12 @@
 					{ ?>
 
 						<div class="groupestrouves">
-						<br/><a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
-						echo $donnees['Zone_geographique']. '<br/>'. '<br/>';
+						echo $donnees['Zone_geographique']. '<br/>';
 						?>
+						<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
 						</div>
 					
 					<?php
@@ -166,11 +186,12 @@
 					{ ?>
 
 						<div class="groupestrouves">
-						<br/><a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
-						echo $donnees['Zone_geographique']. '<br/>'. '<br/>';
+						echo $donnees['Zone_geographique']. '<br/>';
 						?>
+						<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
 						</div>
 					
 					<?php
@@ -188,11 +209,12 @@
 					{ ?>
 
 						<div class="groupestrouves">
-						<br/><a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
-						echo $donnees['Zone_geographique']. '<br/>'. '<br/>';
+						echo $donnees['Zone_geographique']. '<br/>';
 						?>
+						<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
 						</div>
 					
 					<?php
@@ -215,27 +237,58 @@
 	        			die('Erreur : '.$e->getMessage());
 					}
 
-					?>
-					<h3 class="grouperecent">Groupes récemment ajoutés</h3>
-					<?php
 
-					$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique FROM groupe ORDER BY Id DESC LIMIT 0, 3');
+						if (isset($_SESSION['Pseudo'])) {
 
-					while ($donnees = $reponse->fetch())
-					{ ?>
+							?>
+							<h3 class="grouperecent">Groupes récemment ajoutés dans votre ville</h3>
+							<?php
 
-						<div class="groupestrouves">
-						<br/><a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
-						<?php 
-						echo $donnees['Descriptif'] . '<br/>';
-						echo $donnees['Zone_geographique']. '<br/>'. '<br/>';
-						?>
-						</div>
-					
-					<?php
-					}
+							$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique FROM groupe WHERE Zone_geographique = "'.$_SESSION['Ville'].'" ORDER BY Id DESC LIMIT 0, 3');
 
-					$reponse->closeCursor();
+							while ($donnees = $reponse->fetch())
+							{ ?>
+
+								<div class="groupestrouves">
+								<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+								<?php 
+								echo $donnees['Descriptif'] . '<br/>';
+								echo $donnees['Zone_geographique']. '<br/>';
+								?>
+								<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
+								</div>
+							
+							<?php
+							}
+
+							$reponse->closeCursor();
+						}
+
+						else if (!isset($_SESSION['Pseudo'])) {
+
+							?>
+							<h3 class="grouperecent">Groupes récemment ajoutés</h3>
+							<?php
+
+							$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique FROM groupe ORDER BY Id DESC LIMIT 0, 3');
+
+							while ($donnees = $reponse->fetch())
+							{ ?>
+
+								<div class="groupestrouves">
+								<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+								<?php 
+								echo $donnees['Descriptif'] . '<br/>';
+								echo $donnees['Zone_geographique']. '<br/>'. '<br/>';
+								?>
+								</div>
+							
+							<?php
+							}
+
+							$reponse->closeCursor();
+						}
+
 			}	
 			?>
 

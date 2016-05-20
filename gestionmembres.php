@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset='utf8' />
-		<title>Espace administrateur</title>
+		<title>Gestion membres</title>
 		<!-- Feuilles de style -->
 	    <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
     	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
@@ -49,17 +49,65 @@
 		</header>
 
 
+		<?php
+			if (isset($_POST['suppression']) && $_POST['suppression'] == 'Suppression') {
+				try
+				{
+				$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+				}
+				catch(Exception $e)
+				{
+		        	die('Erreur : '.$e->getMessage());
+				}
 
-		<div class="profil">
-			<div class="profilcolonne">
-				<p class="profilnom info1">Bonjour <?php echo htmlentities(trim($_SESSION['Prenom']));?> <?php echo htmlentities(trim($_SESSION['Nom'])); ?> </p>
-				<p class="profilpseudo info1">Votre Pseudo est <?php echo htmlentities(trim($_SESSION['Pseudo'])); ?>! </p>
-				<p class="profilnaissance info1">Vous êtes né(e) le <?php echo htmlentities(trim($_SESSION['Date_naissance'])); ?>. </p>
-				<p class="profilmail info1">Votre mail est <?php echo htmlentities(trim($_SESSION['Mail'])); ?>. </p>
-				<p class="profiladresse info1">Vous habitez au <?php echo htmlentities(trim($_SESSION['Adresse'])); ?>. </p><br />
-			</div>
-			<img class="profilphoto profilcolonne" src=<?php echo htmlentities(trim($_SESSION['Photo'])); ?> />
-		</div>
+				$reponse = $base->query('DELETE FROM membre_inscrit WHERE Pseudo = "'.$_POST['pseudo'].'"');
+
+			}
+
+		?>
+
+		<div class="suppressiondiv">
+            <h3>Supprimer un membre :</h3>
+            <form action="gestionmembres.php" method="post">
+            	Pseudo : <input type="text" name="pseudo" value="<?php if (isset($_POST['pseudo'])) echo htmlentities(trim($_POST['pseudo'])); ?>"><br />
+            	<input type="submit" name="suppression" value="Suppression" id="creer">
+            </form>
+        </div>
+
+        <h3 class="listemembres">Liste des membres du site</h3>
+        
+
+        <?php
+			try
+			{
+			$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+	        	die('Erreur : '.$e->getMessage());
+			}
+
+			?>
+			
+			<?php
+
+				$reponse = $base->query('SELECT Pseudo, Nom, Prenom, Mail FROM membre_inscrit ORDER BY Pseudo ');
+
+				while ($donnees = $reponse->fetch())
+				{ ?>
+
+					<div class="membrestrouves">
+					<br/><?php echo $donnees['Pseudo'] . '<br/>';
+					echo $donnees['Nom'] . '<br/>';
+					echo $donnees['Prenom']. '<br/>'. '<br/>';
+					?>
+					</div>
+					
+				<?php
+				}
+
+				$reponse->closeCursor();	
+		?>
 
 
 

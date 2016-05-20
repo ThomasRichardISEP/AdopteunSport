@@ -49,19 +49,46 @@
 			</div> 			
 		</header>
 
+		<?php
+			if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
+				try
+		        {
+		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+		        }
+		        catch(Exception $e)
+		        {
+		            die('Erreur : '.$e->getMessage());
+		        }
 
-		<div class="profil">
-			<div class="profilcolonne">
-				<p class="profilnom info1">Bonjour <?php echo htmlentities(trim($_SESSION['Prenom']));?> <?php echo htmlentities(trim($_SESSION['Nom'])); ?> </p>
-				<p class="profilpseudo info1">Votre Pseudo est <?php echo htmlentities(trim($_SESSION['Pseudo'])); ?>! </p>
-				<p class="profilnaissance info1">Vous êtes né(e) le <?php echo htmlentities(trim($_SESSION['Date_naissance'])); ?>. </p>
-				<p class="profilmail info1">Votre mail est <?php echo htmlentities(trim($_SESSION['Mail'])); ?>. </p>
-				<p class="profiladresse info1">Vous habitez au <?php echo htmlentities(trim($_SESSION['Adresse'])); ?>. </p><br />
-				<p><a href="modifmembre.php" class="profilmodification info1">Modifier vos informations personnelles</a></p>
-				<p><a href="messagerie.php" class="lienmessagerie info1">Lien vers votre messagerie Messagerie</a></p>
-			</div>
-			<img class="profilphoto profilcolonne" src=<?php echo htmlentities(trim($_SESSION['Photo'])); ?> />
-		</div>
+		        $req = $bdd->prepare('UPDATE membre_inscrit SET Nom = :test WHERE Pseudo = :coucou ');
+				$req->execute(array(
+					'test'=> $_POST['nom'],
+					'coucou'=>"ThomasRichard"
+					));
+
+			}
+
+		?>
+
+		<div class="modificationdiv">
+            <h3>Modification de vos informations :</h3>
+            <form action="modifmembre.php" method="post">
+            Pseudo : <input type="text" name="login" value="<?php echo $_SESSION['Pseudo'] ?>"><br />
+            Mot de passe : <input type="password" name="pass" value=""><br />
+            Confirmation du mdp : <input type="password" name="pass_confirm" value=""><br />
+            Prénom : <input type="text" name="prenom" value="<?php echo $_SESSION['Prenom'] ?>"><br />
+            Nom : <input type="text" name="nom" value="<?php echo $_SESSION['Nom'] ?>"><br />
+            Mail : <input type="text" name="mail" value="<?php echo $_SESSION['Mail'] ?>"><br />
+            Adresse : <input type="text" name="adresse" value="<?php echo $_SESSION['Adresse'] ?>"><br />
+            Date de naissance : <input type="date" name="naissance" value="<?php echo $_SESSION['Date_naissance'] ?>"><br />
+            Photo : <input type="text" name="photo" value="<?php echo $_SESSION['Photo'] ?>"><br />
+            <input type="submit" name="valider" value="Valider" class="button2">
+            </form>
+            <?php
+                if (isset($erreur)) echo '<br />',$erreur;
+            ?>
+        </div>
+
 
 
 		<footer>

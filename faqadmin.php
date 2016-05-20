@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset='utf8' />
-		<title>Espace administrateur</title>
+		<title>Gestion FAQ</title>
 		<!-- Feuilles de style -->
 	    <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
     	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
@@ -50,15 +50,85 @@
 
 
 
-		<div class="profil">
-			<div class="profilcolonne">
-				<p class="profilnom info1">Bonjour <?php echo htmlentities(trim($_SESSION['Prenom']));?> <?php echo htmlentities(trim($_SESSION['Nom'])); ?> </p>
-				<p class="profilpseudo info1">Votre Pseudo est <?php echo htmlentities(trim($_SESSION['Pseudo'])); ?>! </p>
-				<p class="profilnaissance info1">Vous êtes né(e) le <?php echo htmlentities(trim($_SESSION['Date_naissance'])); ?>. </p>
-				<p class="profilmail info1">Votre mail est <?php echo htmlentities(trim($_SESSION['Mail'])); ?>. </p>
-				<p class="profiladresse info1">Vous habitez au <?php echo htmlentities(trim($_SESSION['Adresse'])); ?>. </p><br />
+		<div class="faqadmindiv">
+			<h3>Ajouter une question / réponse :</h3>
+			<form action="faq_post.php" method="post" class="faqformulaire">
+		        	<label for="Question">Question</label> : <input type="text" name="Question" id="Question" placeholder="Entrez votre question" /><br/>
+		        	<label for="Reponse">Réponse</label> :  <input type="text" name="Reponse" id="Reponse" placeholder="Entrez votre réponse" /><br />
+				    <input type="submit" value="Envoyer" id="valider" />
+		    </form>
+		</div>
+
+
+		<div class="faqadmindiv">
+			<h3>Supprimer une question :</h3>
+			<form action="faqadmin.php" method="post">
+		        <label for="Id">Id de la question</label> : <input type="text" name="Idquestion" id="Idquestion" placeholder="Entrez l'Id de la question" /><br/>
+				<input type="submit" name="suppression" value="Suppression" id="creer">
+		    </form>
+		</div>
+
+
+
+
+		<?php
+			if (isset($_POST['suppression']) && $_POST['suppression'] == 'Suppression') {
+				try
+				{
+				$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+				}
+				catch(Exception $e)
+				{
+		        	die('Erreur : '.$e->getMessage());
+				}
+
+				$reponse = $base->query('DELETE FROM faq WHERE Id = "'.$_POST['Idquestion'].'"');
+
+			}
+
+		?>
+
+
+		<div class="faq2">
+			
+			<?php
+		try
+		{
+			$bdd = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+		}
+		catch(Exception $e)
+		{
+        	die('Erreur : '.$e->getMessage());
+		}
+
+		// Récupération des 10 derniers messages
+		$reponse = $bdd->query('SELECT Question, Reponse, Id FROM faq ORDER BY Id');
+
+		// Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
+		while ($donnees = $reponse->fetch())
+		{ ?>
+
+			<div class="posts">
+			<div class="question case">
+				<?php 
+				echo $donnees['Question'] . ' ' . '(Id question : ';
+				echo $donnees['Id'] . ')';
+				?>
 			</div>
-			<img class="profilphoto profilcolonne" src=<?php echo htmlentities(trim($_SESSION['Photo'])); ?> />
+			<div class="reponse case">
+				<?php
+				echo $donnees['Reponse'] . '<br /><br />';
+				?>
+			</div>
+		</div>
+		
+		<?php
+		}
+
+		$reponse->closeCursor();
+
+		?>	
+
 		</div>
 
 

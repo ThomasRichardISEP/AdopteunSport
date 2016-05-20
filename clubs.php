@@ -47,11 +47,16 @@
 		<div class="club">
 			<div class="clubformulaire">
 				<form action="clubs.php" method="post">
-		        	<p>
-		        		<label for="sport">Sport</label> : <input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
-		        		<label for="ville">Ville</label> : <input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
-				        <input type="submit" name="valider" value="Valider" id="valider">
-					</p>
+					<h3>Rechercher un club</h3>
+			        <div class="partie colonnegauche">
+			        	Sport :<br/>
+			        	Ville :
+			        </div>
+			        <div class="partie colonnedroite">
+			        	<input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
+		        		<input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
+			        </div>
+		        	<input type="submit" name="valider" value="Valider" id="valider">
 		    	</form>
     		</div>
 

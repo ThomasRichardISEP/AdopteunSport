@@ -50,10 +50,9 @@
 				if (isset($_SESSION['Pseudo'])) {
 				?>
 					<form action="forum_post.php" method="post" class="forumformulaire">
-			        	<p>
-			        		<label for="Contenu">Message</label> :  <input type="text" name="Contenu" id="Contenu" placeholder="Entrez votre message" /><br />
-					        <input type="submit" value="Envoyer" id="valider" />
-						</p>
+						<h3>Poster un message :</h3>
+			        	<label for="Contenu">Message</label> :  <input type="text" name="Contenu" id="Contenu" placeholder="Entrez votre message" /><br />
+					    <input type="submit" value="Envoyer" id="valider" />
 			    	</form>
 	    	<?php
 	    		}

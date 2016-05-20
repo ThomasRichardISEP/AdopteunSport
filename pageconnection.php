@@ -46,7 +46,7 @@
             if ($data[0] == 1) {
                 session_start();
 
-                $sql1 = 'SELECT Nom, Prenom, Photo, Date_naissance, Mail, Adresse, Administrateur FROM membre_inscrit WHERE Pseudo="'.$_POST['login'].'"';
+                $sql1 = 'SELECT Nom, Prenom, Photo, Date_naissance, Mail, Adresse, Ville, Administrateur FROM membre_inscrit WHERE Pseudo="'.$_POST['login'].'"';
                 $req1 = $base->query($sql1);
                 $data1 = $req1->fetch();
 
@@ -57,6 +57,7 @@
                 $_SESSION['Date_naissance'] = $data1['Date_naissance'];
                 $_SESSION['Mail'] = $data1['Mail'];
                 $_SESSION['Adresse'] = $data1['Adresse'];
+                $_SESSION['Ville'] = $data1['Ville'];
                     if ($data1['Administrateur'] == 0){
                         header('Location: membre.php');
                     }
@@ -82,19 +83,25 @@
 
 
         <div class="connexiondiv">
-        <form action="pageconnection.php" method="post">
-			<h3>Connexion à l'espace membre :</h3>
-            <form action="index.php" method="post">
-            Pseudo : <input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"><br />
-            Mot de passe : <input type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass'])); ?>"><br />
-            <input type="submit" name="connecter" value="Connecter" class="button2"><br/><br/>
-            <a href="pageconnexionadmin.php"> -> Connexion administrateur</a>
-            </form>
+            <form action="pageconnection.php" method="post">
+    			<h3>Connexion à l'espace membre :</h3>
+                <!--<form action="index.php" method="post">-->
+                    <div class="partie colonnegauche">
+                        Pseudo :</br>
+                        Mot de passe : 
+                    </div>
+                    <div class="partie colonnedroite">
+                        <input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"><br />
+                        <input type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass'])); ?>"><br />
+                    </div>
+                    <input type="submit" name="connecter" value="Connecter" class="button2"><br/><br/>
+                    <a href="pageconnexionadmin.php"> -> Connexion administrateur</a>
+               <!-- </form> -->
 
-            <?php
-                if (isset($erreur)) echo '<br />',$erreur;
-            ?>
-        </form>
+                <?php
+                    if (isset($erreur)) echo '<br />',$erreur;
+                ?>
+            </form>
         </div>
 
 

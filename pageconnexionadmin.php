@@ -46,7 +46,7 @@
             if ($data[0] == 1) {
                 session_start();
 
-                $sql1 = 'SELECT Nom, Prenom, Photo, Date_naissance, Mail, Adresse, Administrateur FROM membre_inscrit WHERE Pseudo="'.$_POST['login'].'"';
+                $sql1 = 'SELECT Nom, Prenom, Photo, Date_naissance, Mail, Adresse, Ville, Administrateur FROM membre_inscrit WHERE Pseudo="'.$_POST['login'].'"';
                 $req1 = $base->query($sql1);
                 $data1 = $req1->fetch();
 
@@ -57,6 +57,7 @@
                 $_SESSION['Date_naissance'] = $data1['Date_naissance'];
                 $_SESSION['Mail'] = $data1['Mail'];
                 $_SESSION['Adresse'] = $data1['Adresse'];
+                $_SESSION['Ville'] = $data1['Ville'];
                     if ($data1['Administrateur'] == 0){
                         header('Location: membre.php');
                     }

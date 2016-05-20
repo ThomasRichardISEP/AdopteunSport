@@ -42,7 +42,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
         $data = $req->fetch();
 
         if ($data[0] == 0) {
-        $sql = 'INSERT INTO membre_inscrit(Pseudo, mdp, Nom, Prenom, Date_naissance, Mail, Adresse, Photo) VALUES("'.$_POST['login'].'", "'.md5($_POST['pass']).'", "'.$_POST['nom'].'", "'.$_POST['prenom'].'","'.$_POST['naissance'].'", "'.$_POST['mail'].'", "'.$_POST['adresse'].'", "'.$_POST['photo'].'")';
+        $sql = 'INSERT INTO membre_inscrit(Pseudo, mdp, Nom, Prenom, Date_naissance, Mail, Adresse, Ville, Photo) VALUES("'.$_POST['login'].'", "'.md5($_POST['pass']).'", "'.$_POST['nom'].'", "'.$_POST['prenom'].'","'.$_POST['naissance'].'", "'.$_POST['mail'].'", "'.$_POST['adresse'].'", "'.$_POST['ville'].'", "'.$_POST['photo'].'")';
         $base->query($sql);
 
         session_start();
@@ -53,6 +53,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
         $_SESSION['Date_naissance'] = $_POST['naissance'];
         $_SESSION['Mail'] = $_POST['mail'];
         $_SESSION['Adresse'] = $_POST['adresse'];
+        $_SESSION['Ville'] = $_POST['ville'];
         header('Location: membre.php');
         exit();
         }
@@ -71,17 +72,34 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
         <div class="inscriptiondiv">
             <h3>Inscription à l'espace membre :</h3>
             <form action="inscription.php" method="post">
-            Pseudo : <input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"><br />
-            Mot de passe : <input type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass'])); ?>"><br />
-            Confirmation du mdp : <input type="password" name="pass_confirm" value="<?php if (isset($_POST['pass_confirm'])) echo htmlentities(trim($_POST['pass_confirm'])); ?>"><br />
-            Prénom : <input type="text" name="prenom" value="<?php if (isset($_POST['prenom'])) echo htmlentities(trim($_POST['prenom'])); ?>"><br />
-            Nom : <input type="text" name="nom" value="<?php if (isset($_POST['nom'])) echo htmlentities(trim($_POST['nom'])); ?>"><br />
-            Mail : <input type="text" name="mail" value="<?php if (isset($_POST['mail'])) echo htmlentities(trim($_POST['mail'])); ?>"><br />
-            Adresse : <input type="text" name="adresse" value="<?php if (isset($_POST['adresse'])) echo htmlentities(trim($_POST['adresse'])); ?>"><br />
-            Date de naissance : <input type="date" name="naissance" value="<?php if (isset($_POST['naissance'])) echo htmlentities(trim($_POST['naissance'])); ?>"><br />
-            Photo : <input type="text" name="photo" value="<?php if (isset($_POST['photo'])) echo htmlentities(trim($_POST['photo'])); ?>"><br />
-            Acceptez-vous les <a href="cgu.php" class="liencgu">CGU</a>? <input type="checkbox" name="cgucheckbox" value="cgucheckbox"><br />
-            <input type="submit" name="inscription" value="Inscription" class="button2">
+                <div class="partie colonnegauche">
+                    Pseudo :<br/>
+                    Mot de passe :<br/>
+                    Confirmation du mdp :<br/>
+                    Prénom :<br/>
+                    Nom :<br/>
+                    Mail :<br/>
+                    Adresse :<br/>
+                    Ville :<br/>
+                    Date de naissance :<br/>
+                    Photo :<br/>
+                </div>
+
+                <div class="partie colonnedroite">
+                    <input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"><br />
+                    <input type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass'])); ?>"><br />
+                    <input type="password" name="pass_confirm" value="<?php if (isset($_POST['pass_confirm'])) echo htmlentities(trim($_POST['pass_confirm'])); ?>"><br />
+                    <input type="text" name="prenom" value="<?php if (isset($_POST['prenom'])) echo htmlentities(trim($_POST['prenom'])); ?>"><br />
+                    <input type="text" name="nom" value="<?php if (isset($_POST['nom'])) echo htmlentities(trim($_POST['nom'])); ?>"><br />
+                    <input type="text" name="mail" value="<?php if (isset($_POST['mail'])) echo htmlentities(trim($_POST['mail'])); ?>"><br />
+                    <input type="text" name="adresse" value="<?php if (isset($_POST['adresse'])) echo htmlentities(trim($_POST['adresse'])); ?>"><br />
+                    <input type="text" name="ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"><br />
+                    <input type="date" name="naissance" value="<?php if (isset($_POST['naissance'])) echo htmlentities(trim($_POST['naissance'])); ?>"><br />
+                    <input type="text" name="photo" value="<?php if (isset($_POST['photo'])) echo htmlentities(trim($_POST['photo'])); ?>"><br />
+                </div>
+            
+                Acceptez-vous les <a href="cgu.php" class="liencgu">CGU</a>? <input type="checkbox" name="cgucheckbox" value="cgucheckbox"><br />
+                <input type="submit" name="inscription" value="Inscription" class="button2">
             </form>
             <?php
                 if (isset($erreur)) echo '<br />',$erreur;
@@ -120,26 +138,3 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 
     </body>
 </html>
-
-
-
-
-<!-- <div class="coordonnees">
-            <lable for="prénom">Prénom :</label><br><br>
-            <lable for="nom">Nom :</label><br><br>
-            <lable for="username">Identifiant :</label><br><br>
-            <lable for="mot_de_passe">Mot de pase :</label><br><br>
-            <lable for="ville">Ville :</label><br><br>
-            <lable for="age">Âge :</label><br><br>
-            
-        </div>
-
-        <div class="barretexte">
-            <input type="text" id="prenom" placeholder="Ex: Thomas"/><br><br>
-            <input type="text" id="nom" placeholder="Ex: Richard"/><br><br>
-            <input type="text" id="username" placeholder="Ex: Thomasrichard"/><br><br>
-            <input type="text" id="mot_de_passe" placeholder="Mot de passe"/><br><br>
-            <input type="text" id="ville" placeholder="Ex: Paris"/><br><br>
-            <select id="age"></select><br><br>
-        </div>
-        -->

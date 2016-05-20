@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset='utf8' />
-		<title>Espace administrateur</title>
+		<title>Gestion Forum</title>
 		<!-- Feuilles de style -->
 	    <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
     	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
@@ -50,15 +50,85 @@
 
 
 
-		<div class="profil">
-			<div class="profilcolonne">
-				<p class="profilnom info1">Bonjour <?php echo htmlentities(trim($_SESSION['Prenom']));?> <?php echo htmlentities(trim($_SESSION['Nom'])); ?> </p>
-				<p class="profilpseudo info1">Votre Pseudo est <?php echo htmlentities(trim($_SESSION['Pseudo'])); ?>! </p>
-				<p class="profilnaissance info1">Vous êtes né(e) le <?php echo htmlentities(trim($_SESSION['Date_naissance'])); ?>. </p>
-				<p class="profilmail info1">Votre mail est <?php echo htmlentities(trim($_SESSION['Mail'])); ?>. </p>
-				<p class="profiladresse info1">Vous habitez au <?php echo htmlentities(trim($_SESSION['Adresse'])); ?>. </p><br />
+		<?php
+			if (isset($_POST['suppression']) && $_POST['suppression'] == 'Suppression') {
+				try
+				{
+				$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+				}
+				catch(Exception $e)
+				{
+		        	die('Erreur : '.$e->getMessage());
+				}
+
+				$reponse = $base->query('DELETE FROM messages WHERE Id_message = "'.$_POST['Idmessage'].'"');
+
+			}
+
+		?>
+
+
+		<div class="forumadmindiv">
+			<form action="forum_post_admin.php" method="post">
+				<h3>Poster un message :</h3>
+				<label for="Contenu">Message</label> :  <input type="text" name="Contenu" id="Contenu" placeholder="Entrez votre message" /><br />
+				<input type="submit" value="Envoyer" id="valider" />
+			</form>
+		</div>
+
+
+		<div class="forumadmindiv">
+			<h3>Supprimer un message :</h3>
+			<form action="forumadmin.php" method="post">
+		        <label for="Id">Id du message</label> : <input type="text" name="Idmessage" id="Idmessage" placeholder="Entrez l'Id du message" /><br/>
+				<input type="submit" name="suppression" value="Suppression" id="creer">
+		    </form>
+		</div>
+
+
+
+		<div class="forum2">
+
+			<?php
+			try
+			{
+				$bdd = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+	        	die('Erreur : '.$e->getMessage());
+			}
+
+			// Récupération des messages
+			$reponse = $bdd->query('SELECT Pseudo_membre_inscrit, Contenu, Date_message, Heure_message, Id_message FROM messages ORDER BY Id_message DESC ');
+
+			// Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
+			while ($donnees = $reponse->fetch())
+			{ ?>
+
+				<div class="postsforum">
+				<div class="auteur caseforum">
+					<?php 
+					echo $donnees['Pseudo_membre_inscrit'] . ' ' . '(Id msg : ' ;
+					echo $donnees['Id_message'] . ')' . '<br/>' . 'le ';
+					echo $donnees['Date_message'] . ' à ';
+					echo $donnees['Heure_message'];
+					?>
+				</div>
+				<div class="msg caseforum">
+					<?php
+					echo $donnees['Contenu'] . '<br /><br />';
+					?>
+				</div>
 			</div>
-			<img class="profilphoto profilcolonne" src=<?php echo htmlentities(trim($_SESSION['Photo'])); ?> />
+			
+			<?php
+			}
+
+			$reponse->closeCursor();
+
+			?>
+
 		</div>
 
 
