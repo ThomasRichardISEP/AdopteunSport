@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Inscription</title>
-
-        <!-- Feuilles de style -->
-        <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
-        <link href='assets/css/style.css' rel='stylesheet' type='text/css' />
-    </head>
-
-    <body>
-    	<header>
-            <div class="container">
-                <div class="connexion"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
-            </div>
-        </header>
-
-        <?php
+<?php
 // on teste si le visiteur a soumis le formulaire
 if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
     // on teste l'existence de nos variables. On teste également si elles ne sont pas vides
@@ -67,6 +49,26 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Inscription</title>
+
+        <!-- Feuilles de style -->
+        <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
+        <link href='assets/css/style.css' rel='stylesheet' type='text/css' />
+    </head>
+
+    <body>
+    	<header>
+            <div class="container">
+                <div class="connexion"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
+            </div>
+        </header>
+
+        
 
 
         <div class="inscriptiondiv">

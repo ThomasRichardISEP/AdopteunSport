@@ -1,3 +1,28 @@
+<?php
+	session_start();
+	if (!isset($_SESSION['Pseudo'])) {  
+		header ('Location: index.php');
+		exit();
+	}
+	?>
+
+<?php
+			if (isset($_POST['suppression']) && $_POST['suppression'] == 'Suppression') {
+				try
+				{
+				$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+				}
+				catch(Exception $e)
+				{
+		        	die('Erreur : '.$e->getMessage());
+				}
+
+				$reponse = $base->query('DELETE FROM faq WHERE Id = "'.$_POST['Idquestion'].'"');
+
+			}
+
+		?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,14 +32,6 @@
 	    <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
     	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
 	</head>
-
-	<?php
-	session_start();
-	if (!isset($_SESSION['Pseudo'])) {  
-		header ('Location: index.php');
-		exit();
-	}
-	?>
 
 
 	<body>
@@ -68,25 +85,6 @@
 		    </form>
 		</div>
 
-
-
-
-		<?php
-			if (isset($_POST['suppression']) && $_POST['suppression'] == 'Suppression') {
-				try
-				{
-				$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-				}
-				catch(Exception $e)
-				{
-		        	die('Erreur : '.$e->getMessage());
-				}
-
-				$reponse = $base->query('DELETE FROM faq WHERE Id = "'.$_POST['Idquestion'].'"');
-
-			}
-
-		?>
 
 
 		<div class="faq2">

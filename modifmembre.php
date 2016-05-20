@@ -1,3 +1,31 @@
+<?php
+	session_start();
+	if (!isset($_SESSION['Pseudo'])) {  
+		header ('Location: index.php');
+		exit();
+	}
+	?>
+
+<?php
+			if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
+				try
+		        {
+		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+		        }
+		        catch(Exception $e)
+		        {
+		            die('Erreur : '.$e->getMessage());
+		        }
+
+		        $req = $bdd->prepare('UPDATE membre_inscrit SET Nom = :test WHERE Pseudo = :coucou ');
+				$req->execute(array(
+					'test'=> $_POST['nom'],
+					'coucou'=>"ThomasRichard"
+					));
+
+			}
+		?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,13 +36,6 @@
     	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
 	</head>
 
-	<?php
-	session_start();
-	if (!isset($_SESSION['Pseudo'])) {  
-		header ('Location: index.php');
-		exit();
-	}
-	?>
 
 
 	<body>
@@ -49,26 +70,7 @@
 			</div> 			
 		</header>
 
-		<?php
-			if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
-				try
-		        {
-		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		        }
-		        catch(Exception $e)
-		        {
-		            die('Erreur : '.$e->getMessage());
-		        }
-
-		        $req = $bdd->prepare('UPDATE membre_inscrit SET Nom = :test WHERE Pseudo = :coucou ');
-				$req->execute(array(
-					'test'=> $_POST['nom'],
-					'coucou'=>"ThomasRichard"
-					));
-
-			}
-
-		?>
+		
 
 		<div class="modificationdiv">
             <h3>Modification de vos informations :</h3>

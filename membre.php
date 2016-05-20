@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if (!isset($_SESSION['Pseudo'])) {  
+		header ('Location: index.php');
+		exit();
+	}
+	?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,14 +15,6 @@
 	    <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
     	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
 	</head>
-
-	<?php
-	session_start();
-	if (!isset($_SESSION['Pseudo'])) {  
-		header ('Location: index.php');
-		exit();
-	}
-	?>
 
 
 	<body>

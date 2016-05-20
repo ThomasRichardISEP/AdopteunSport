@@ -306,6 +306,28 @@ input{
 }
 
 
+.clubformulaire2{
+	text-align: center;
+	border: solid black 2px;
+	background-color: rgb(150,150,150);
+	border-radius: 10px;
+	display: inline-block;
+	width: 45%;
+	vertical-align: middle;
+}
+
+
+.formulairecreerclub{
+	text-align: center;
+	border: solid black 2px;
+	background-color: rgb(150,150,150);
+	border-radius: 10px;
+	display: inline-block;
+	width: 45%;
+	vertical-align: middle;
+}
+
+
 .clubville{
 	background-color: rgb(150,150,150);
 	border: solid black 2px;

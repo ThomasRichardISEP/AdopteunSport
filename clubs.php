@@ -1,3 +1,34 @@
+<?php
+			if (isset($_POST['creer']) && $_POST['creer'] == 'Créer') {
+
+			    if ((isset($_POST['nomclub']) && !empty($_POST['nomclub'])) && (isset($_POST['choixsport']) && !empty($_POST['choixsport'])) && (isset($_POST['choixville']) && !empty($_POST['choixville'])) && (isset($_POST['descriptif'])  && !empty($_POST['descriptif'])) ) {
+
+			        try
+			        {
+			            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			        }
+			        catch(Exception $e)
+			        {
+			            die('Erreur : '.$e->getMessage());
+			        }
+
+			        // on recherche si ce login est déjà utilisé par un autre membre
+			        $sql = 'SELECT count(*) FROM club WHERE Titre="'.$_POST['nomclub'].'"';
+			        $req = $base->query($sql);
+			        $data = $req->fetch();
+
+			        if ($data[0] == 0) {
+			        $sql = 'INSERT INTO club(Titre, Sport, Descriptif, Zone_geographique, Nb_max_personnes, Photo, Pseudo_membre_createur, Date_creation) VALUES("'.$_POST['nomclub'].'", "'.$_POST['choixsport'].'", "'.$_POST['descriptif'].'", "'.$_POST['choixville'].'","'.$_POST['nbmembres'].'", "'.$_POST['photo'].'", "'.$_SESSION['Pseudo'].'", CURDATE())';
+			        $base->query($sql);
+			        }
+
+			        header('Location: clubs.php');
+			        
+			    }
+			    
+			}
+		?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -44,21 +75,74 @@
 		</header>
 
 
+
 		<div class="club">
-			<div class="clubformulaire">
-				<form action="clubs.php" method="post">
-					<h3>Rechercher un club</h3>
-			        <div class="partie colonnegauche">
-			        	Sport :<br/>
-			        	Ville :
-			        </div>
-			        <div class="partie colonnedroite">
-			        	<input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
-		        		<input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
-			        </div>
-		        	<input type="submit" name="valider" value="Valider" id="valider">
-		    	</form>
-    		</div>
+
+			<?php
+			if (!isset($_SESSION['Pseudo'])) {
+				?>
+				<div class="clubformulaire">
+					<form action="clubs.php" method="post">
+						<h3>Rechercher un club</h3>
+				        <div class="partie colonnegauche">
+				        	Sport :<br/>
+				        	Ville :
+				        </div>
+				        <div class="partie colonnedroite">
+				        	<input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
+			        		<input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
+				        </div>
+			        	<input type="submit" name="valider" value="Valider" id="valider">
+			    	</form>
+	    		</div>
+	    	<?php
+	    	}
+
+	    	else if (isset($_SESSION['Pseudo'])) {
+	    		?>
+	    		<div class="clubformulaire2">
+					<form action="clubs.php" method="post">
+						<h3>Rechercher un club</h3>
+				        <div class="partie colonnegauche">
+				        	Sport :<br/>
+				        	Ville :
+				        </div>
+				        <div class="partie colonnedroite">
+				        	<input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
+			        		<input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
+				        </div>
+			        	<input type="submit" name="valider" value="Valider" id="valider">
+			    	</form>
+	    		</div>
+
+	    		<div class="formulairecreerclub">
+					<form action="clubs.php" method="post">
+						<h3>Ajouter un club</h3>
+			        	<div class="partie colonnegauche">
+			        		Nom du club :<br/>
+			        		Sport :<br/>
+			        		Ville :<br/>
+			        		Descriptif :<br/>
+			        		Nb de membres :<br/>
+			        		Photo :
+			        	</div>
+			        	<div class="partie colonnedroite">
+			        		<input type="text" name="nomclub" placeholder="Entrez un nom" value="<?php if (isset($_POST['nomclub'])) echo htmlentities(trim($_POST['nomclub'])); ?>"/><br />
+			        		<input type="text" name="choixsport" placeholder="Entrez un sport" value="<?php if (isset($_POST['choixsport'])) echo htmlentities(trim($_POST['choixsport'])); ?>"/><br />
+			        		<input type="text" name="choixville" placeholder="Entrez une ville" value="<?php if (isset($_POST['choixville'])) echo htmlentities(trim($_POST['choixville'])); ?>"/><br />
+			        		<input type="text" name="descriptif" placeholder="Entrez un descriptif" value="<?php if (isset($_POST['descriptif'])) echo htmlentities(trim($_POST['descriptif'])); ?>"/><br />
+			        		<input type="text" name="nbmembres" placeholder="Entrez un nombre de membres" value="<?php if (isset($_POST['nbmembres'])) echo htmlentities(trim($_POST['nbmembres'])); ?>"/><br />
+			        		<input type="text" name="photo" placeholder="Entrez une photo" value="<?php if (isset($_POST['photo'])) echo htmlentities(trim($_POST['photo'])); ?>"/><br />
+			        	</div>			        		
+					        <input type="submit" name="creer" value="Créer" id="creer">
+						
+			    	</form>
+    			</div>
+
+	    	<?php
+	    	}
+	    	?>
+
 
 
 			<?php

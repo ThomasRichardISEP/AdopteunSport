@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Connexion administrateur</title>
-
-        <!-- Feuilles de style -->
-        <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
-        <link href='assets/css/style.css' rel='stylesheet' type='text/css' />
-    </head>
-
-
-    <body>
-
-    	<header>
-            <div class="container">
-                <div class="connexion"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
-            </div>
-        </header>
-
-
-
-        <?php
+<?php
         // on teste si le visiteur a soumis le formulaire de connexion
         if (isset($_POST['connecter']) && $_POST['connecter'] == 'Connecter') {
             if ((isset($_POST['login']) && !empty($_POST['login'])) && (isset($_POST['pass']) && !empty($_POST['pass']))) {
@@ -81,6 +59,27 @@
         }
         ?>
 
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Connexion administrateur</title>
+
+        <!-- Feuilles de style -->
+        <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
+        <link href='assets/css/style.css' rel='stylesheet' type='text/css' />
+    </head>
+
+
+    <body>
+
+    	<header>
+            <div class="container">
+                <div class="connexion"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
+            </div>
+        </header>
+
+        
 
         <div class="connexiondiv">
         <form action="pageconnection.php" method="post">

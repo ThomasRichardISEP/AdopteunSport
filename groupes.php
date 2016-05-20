@@ -1,3 +1,34 @@
+<?php
+			if (isset($_POST['creer']) && $_POST['creer'] == 'Créer') {
+
+			    if ((isset($_POST['nomgroupe']) && !empty($_POST['nomgroupe'])) && (isset($_POST['choixsport']) && !empty($_POST['choixsport'])) && (isset($_POST['choixville']) && !empty($_POST['choixville'])) && (isset($_POST['descriptif'])  && !empty($_POST['descriptif'])) ) {
+
+			        try
+			        {
+			            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			        }
+			        catch(Exception $e)
+			        {
+			            die('Erreur : '.$e->getMessage());
+			        }
+
+			        // on recherche si ce login est déjà utilisé par un autre membre
+			        $sql = 'SELECT count(*) FROM groupe WHERE Titre="'.$_POST['nomgroupe'].'"';
+			        $req = $base->query($sql);
+			        $data = $req->fetch();
+
+			        if ($data[0] == 0) {
+			        $sql = 'INSERT INTO groupe(Titre, Descriptif, Zone_geographique, Nb_max_personnes, Photo, Nom_sport, Pseudo_membre_createur, Date_creation) VALUES("'.$_POST['nomgroupe'].'", "'.$_POST['descriptif'].'", "'.$_POST['choixville'].'", "'.$_POST['nbmembres'].'","'.$_POST['photo'].'", "'.$_POST['choixsport'].'", "'.$_SESSION['Pseudo'].'", CURDATE())';
+			        $base->query($sql);
+			        }
+
+			        header('Location: groupes.php');
+			        
+			    }
+			    
+			}
+		?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -43,37 +74,6 @@
 			</div> 			
 		</header>
 
-
-		<?php
-			if (isset($_POST['creer']) && $_POST['creer'] == 'Créer') {
-
-			    if ((isset($_POST['nomgroupe']) && !empty($_POST['nomgroupe'])) && (isset($_POST['choixsport']) && !empty($_POST['choixsport'])) && (isset($_POST['choixville']) && !empty($_POST['choixville'])) && (isset($_POST['descriptif'])  && !empty($_POST['descriptif'])) ) {
-
-			        try
-			        {
-			            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-			        }
-			        catch(Exception $e)
-			        {
-			            die('Erreur : '.$e->getMessage());
-			        }
-
-			        // on recherche si ce login est déjà utilisé par un autre membre
-			        $sql = 'SELECT count(*) FROM groupe WHERE Titre="'.$_POST['nomgroupe'].'"';
-			        $req = $base->query($sql);
-			        $data = $req->fetch();
-
-			        if ($data[0] == 0) {
-			        $sql = 'INSERT INTO groupe(Titre, Descriptif, Zone_geographique, Nb_max_personnes, Photo, Nom_sport, Pseudo_membre_createur, Date_creation) VALUES("'.$_POST['nomgroupe'].'", "'.$_POST['descriptif'].'", "'.$_POST['choixville'].'", "'.$_POST['nbmembres'].'","'.$_POST['photo'].'", "'.$_POST['choixsport'].'", "'.$_SESSION['Pseudo'].'", CURDATE())';
-			        $base->query($sql);
-			        }
-
-			        header('Location: groupes.php');
-			        
-			    }
-			    
-			}
-		?>
 
 
 		<div class="groupe">

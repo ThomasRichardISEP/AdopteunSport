@@ -1,4 +1,32 @@
-<!DOCTYPE html>
+<?php
+	session_start();
+	if (!isset($_SESSION['Pseudo'])) {  
+		header ('Location: index.php');
+		exit();
+	}
+	?>
+
+<?php
+			if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer') {
+				if ((isset($_POST['prenomdestinataire']) && !empty($_POST['prenomdestinataire'])) && (isset($_POST['nomdestinataire']) && !empty($_POST['nomdestinataire']))) {
+
+					 try
+	        		{
+	            		$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+	        		}
+	        		catch(Exception $e)
+	        		{
+	            		die('Erreur : '.$e->getMessage());
+	        		}
+
+	        		$sql = 'INSERT INTO messagerie(Prenomauteur, Nomauteur, Prenomdestinataire, Nomdestinataire, Message) VALUES("'.$_SESSION['Prenom'].'", "'.$_SESSION['Nom'].'", "'.$_POST['prenomdestinataire'].'", "'.$_POST['nomdestinataire'].'","'.$_POST['message'].'")';
+	        		$base->query($sql);
+
+	        	}
+	        }
+	        ?>
+
+!DOCTYPE html>
 <html>
 	<head>
 		<meta charset='utf8' />
@@ -8,13 +36,7 @@
     	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
 	</head>
 
-	<?php
-	session_start();
-	if (!isset($_SESSION['Pseudo'])) {  
-		header ('Location: index.php');
-		exit();
-	}
-	?>
+	
 
 	<body>
 
@@ -61,25 +83,7 @@
 	       		</form>
 	       	</div>
 
-	       	<?php
-			if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer') {
-				if ((isset($_POST['prenomdestinataire']) && !empty($_POST['prenomdestinataire'])) && (isset($_POST['nomdestinataire']) && !empty($_POST['nomdestinataire']))) {
-
-					 try
-	        		{
-	            		$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-	        		}
-	        		catch(Exception $e)
-	        		{
-	            		die('Erreur : '.$e->getMessage());
-	        		}
-
-	        		$sql = 'INSERT INTO messagerie(Prenomauteur, Nomauteur, Prenomdestinataire, Nomdestinataire, Message) VALUES("'.$_SESSION['Prenom'].'", "'.$_SESSION['Nom'].'", "'.$_POST['prenomdestinataire'].'", "'.$_POST['nomdestinataire'].'","'.$_POST['message'].'")';
-	        		$base->query($sql);
-
-	        	}
-	        }
-	        ?>
+	       	
 
 	        	<?php
 					try
