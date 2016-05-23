@@ -17,8 +17,7 @@
 		        	die('Erreur : '.$e->getMessage());
 				}
 
-				$reponse = $base->query('DELETE FROM faq WHERE Id = "'.$_POST['Idquestion'].'"');
-				//$reponse = $base->query('DELETE FROM faq WHERE Id = "'.$papa.'" ');
+				$reponse = $base->query('DELETE FROM groupe WHERE Titre = "'.$_POST['titre'].'"');
 
 			}
 
@@ -28,7 +27,7 @@
 <html>
 	<head>
 		<meta charset='utf8' />
-		<title>Gestion FAQ</title>
+		<title>Gestion groupes</title>
 		<!-- Feuilles de style -->
 	    <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
     	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
@@ -69,69 +68,49 @@
 
 
 
-		<div class="faqadmindiv">
-			<h3>Ajouter une question / réponse :</h3>
-			<form action="faq_post.php" method="post" class="faqformulaire">
-		        	<label for="Question">Question</label> : <input type="text" name="Question" id="Question" placeholder="Entrez votre question" /><br/>
-		        	<label for="Reponse">Réponse</label> :  <input type="text" name="Reponse" id="Reponse" placeholder="Entrez votre réponse" /><br />
-				    <input type="submit" value="Envoyer" id="valider" />
-		    </form>
-		</div>
+		<div class="suppressiondiv">
+            <h3>Supprimer un groupe :</h3>
+            <form action="gestionmembres.php" method="post">
+            	Nom du groupe : <input type="text" name="titre" value="<?php if (isset($_POST['titre'])) echo htmlentities(trim($_POST['titre'])); ?>"><br />
+            	<input type="submit" name="suppression" value="Suppression" id="creer">
+            </form>
+        </div>
 
+        <h3 class="listemembres">Liste des groupes du site</h3>
+        
 
-		<div class="faqadmindiv">
-			<h3>Supprimer une question :</h3>
-			<form action="faqadmin.php" method="post">
-		        <label for="Id">Id de la question</label> : <input type="text" name="Idquestion" id="Idquestion" placeholder="Entrez l'Id de la question" /><br/>
-				<input type="submit" name="suppression" value="Suppression" id="creer">
-		    </form>
-		</div>
+        <?php
+			try
+			{
+			$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+	        	die('Erreur : '.$e->getMessage());
+			}
 
-
-
-		<div class="faq2">
+			?>
 			
 			<?php
-		try
-		{
-			$bdd = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		}
-		catch(Exception $e)
-		{
-        	die('Erreur : '.$e->getMessage());
-		}
 
-		// Récupération des 10 derniers messages
-		$reponse = $bdd->query('SELECT Question, Reponse, Id FROM faq ORDER BY Id');
+				$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique, Pseudo_membre_createur FROM groupe ORDER BY Titre ');
 
-		// Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
-		while ($donnees = $reponse->fetch())
-		{ ?>
+				while ($donnees = $reponse->fetch())
+				{ ?>
 
-			<div class="posts">
-			<div class="question case">
-				<?php 
-				echo $donnees['Question'] . ' ' . '(Id question : ';
-				echo $donnees['Id'] . ')';
-				?>
-			</div>
-			<div class="reponse case">
+					<div class="membrestrouves">
+					<br/><?php echo $donnees['Titre'] . '<br/>';
+					echo $donnees['Descriptif'] . '<br/>';
+					echo $donnees['Zone_geographique'] . '<br/>';
+					echo $donnees['Pseudo_membre_createur']. '<br/>'. '<br/>';
+					?>
+					</div>
+					
 				<?php
-				echo $donnees['Reponse'] . '<br /><br />';
-				?>
-				<form method="post">
-				</form>
-			</div>
-		</div>
-		
-		<?php
-		}
+				}
 
-		$reponse->closeCursor();
-
-		?>	
-
-		</div>
+				$reponse->closeCursor();	
+		?>
 
 
 

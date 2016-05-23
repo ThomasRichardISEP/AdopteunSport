@@ -1,9 +1,37 @@
+<?php
+session_start();
+	$grp = $_GET['Titregroupe'];
+	if (isset($_POST['rejoindre']) && $_POST['rejoindre'] == 'Rejoindre') {
+
+		try
+			{
+			    $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+			    die('Erreur : '.$e->getMessage());
+			}
+
+		$sql = 'SELECT count(*) FROM appartenance_groupe WHERE Pseudo_membre_inscrit = "'.$_SESSION['Pseudo'].'" ';
+		$req = $base->query($sql);
+		$data = $req->fetch();
+
+		if ($data[0] == 0) {
+			$sql = 'INSERT INTO appartenance_groupe(Pseudo_membre_inscrit, Titre_groupe) VALUES("'.$_SESSION['Pseudo'].'", "'.$grp.'")';
+			$base->query($sql);
+		}
+
+		header('Location:index.php');		
+
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset='utf8' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Page Mutable</title>
+		<title>Page Mutable Groupe</title>
 		
 		<!-- Feuille de style -->
 		<link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
@@ -16,8 +44,7 @@
 			<div class="container haut">
 				<div class="connexion element"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
 				<div class="connexion droite element">
-					<?php
-						session_start();
+					<?php	
 						if (!isset($_SESSION['Pseudo'])) {
 							?>
 							<a href="inscription.php" class="button">Inscription</a>
@@ -44,9 +71,42 @@
 		</header>
 
 		
+		<div class="detailgroupe">
+			<h3><?php echo $_GET['Titregroupe']; ?></h3>
+			<?php
+				try
+					{
+						$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+					}
+					catch(Exception $e)
+					{
+	        			die('Erreur : '.$e->getMessage());
+					}
 
+				$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique, Nb_max_personnes, Pseudo_membre_createur, Date_creation FROM groupe WHERE Titre="'.$_GET['Titregroupe'].'"');
 
+				while ($donnees = $reponse->fetch())
+					{ ?>
+						<p>Ce groupe est un <?php echo $donnees['Descriptif']; ?>.</p>
+						<p>Ce groupe se situe à <?php echo $donnees['Zone_geographique']; ?>.</p>
+						<p>Ce groupe accueille au maximum <?php echo $donnees['Nb_max_personnes']; ?> personnes.</p>
+						<p>Ce groupe est dirigé par <?php echo $donnees['Pseudo_membre_createur']; ?>.</p>
+						<p>Ce groupe a été créé le <?php echo $donnees['Date_creation']; ?>.</p>
+					<?php
+					}
 
+					$reponse->closeCursor();
+				
+				if (isset($_SESSION['Pseudo'])) {
+					?><form method="post">
+						<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
+					</form>
+				<?php 
+				}
+			?>
+			<P><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=pagemutablegroupe.php?Titregroupe=<?php echo $_GET['Titregroupe']; ?>"><img class="lienpartage" src="Images/fbshare.png" /></a></p>
+
+		</div>
 
 
 

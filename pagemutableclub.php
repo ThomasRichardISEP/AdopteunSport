@@ -1,5 +1,29 @@
 <?php
 session_start();
+	$club = $_GET['Titreclub'];
+	if (isset($_POST['rejoindre']) && $_POST['rejoindre'] == 'Rejoindre') {
+
+		try
+			{
+			    $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+			    die('Erreur : '.$e->getMessage());
+			}
+
+		$sql = 'SELECT count(*) FROM appartenance_club WHERE Pseudo_membre_inscrit = "'.$_SESSION['Pseudo'].'" ';
+		$req = $base->query($sql);
+		$data = $req->fetch();
+
+		if ($data[0] == 0) {
+			$sql = 'INSERT INTO appartenance_club(Pseudo_membre_inscrit, Titre_club) VALUES("'.$_SESSION['Pseudo'].'", "'.$club.'")';
+			$base->query($sql);
+		}
+
+		header('Location:index.php');		
+
+	}
 ?>
 
 <!DOCTYPE html>
@@ -7,12 +31,12 @@ session_start();
 	<head>
 		<meta charset='utf8' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Forum</title>
+		<title>Page Mutable Club</title>
 		
 		<!-- Feuille de style -->
 		<link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
 		<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
-
+		
 	</head>
 	<body>
 
@@ -45,62 +69,44 @@ session_start();
 				<a href="faq.php" class="button2">Aide</a>
 			</div> 			
 		</header>
+
 		
-
-		<div class="forum">
-
+		<div class="detailclub">
+			<h3><?php echo $_GET['Titreclub']; ?></h3>
 			<?php
-				if (isset($_SESSION['Pseudo'])) {
-				?>
-					<form action="forum_post.php" method="post" class="forumformulaire">
-						<h3>Poster un message :</h3>
-			        	<label for="Contenu">Message</label> :  <input type="text" name="Contenu" id="Contenu" placeholder="Entrez votre message" /><br />
-					    <input type="submit" value="Envoyer" id="valider" />
-			    	</form>
-	    	<?php
-	    		}
-	    	?>
+				try
+					{
+						$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+					}
+					catch(Exception $e)
+					{
+	        			die('Erreur : '.$e->getMessage());
+					}
 
-			<?php
-			try
-			{
-				$bdd = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-			}
-			catch(Exception $e)
-			{
-	        	die('Erreur : '.$e->getMessage());
-			}
+				$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique, Nb_max_personnes, Pseudo_membre_createur, Date_creation FROM club WHERE Titre="'.$_GET['Titreclub'].'"');
 
-			// Récupération des messages
-			$reponse = $bdd->query('SELECT Pseudo_membre_inscrit, Contenu, Date_message, Heure_message FROM messages ORDER BY Id_message DESC ');
-
-			// Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
-			while ($donnees = $reponse->fetch())
-			{ ?>
-
-				<div class="postsforum">
-				<div class="auteur caseforum">
-					<?php 
-					echo $donnees['Pseudo_membre_inscrit'] . '<br/>' . 'le ';
-					echo $donnees['Date_message'] . ' à ';
-					echo $donnees['Heure_message'];
-					?>
-				</div>
-				<div class="msg caseforum">
+				while ($donnees = $reponse->fetch())
+					{ ?>
+						<p>Ce groupe est un <?php echo $donnees['Descriptif']; ?>.</p>
+						<p>Ce groupe se situe à <?php echo $donnees['Zone_geographique']; ?>.</p>
+						<p>Ce groupe accueille au maximum <?php echo $donnees['Nb_max_personnes']; ?> personnes.</p>
+						<p>Ce groupe est dirigé par <?php echo $donnees['Pseudo_membre_createur']; ?>.</p>
+						<p>Ce groupe a été créé le <?php echo $donnees['Date_creation']; ?>.</p>
 					<?php
-					echo $donnees['Contenu'] . '<br /><br />';
-					?>
-				</div>
-			</div>
-			
-			<?php
-			}
+					}
 
-			$reponse->closeCursor();
-
+					$reponse->closeCursor();
+				
+				if (isset($_SESSION['Pseudo'])) {
+					?><form method="post">
+						<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
+					</form>
+				<?php 
+				}
 			?>
-
+			
 		</div>
+
 
 
 		<footer>
@@ -116,7 +122,7 @@ session_start();
 
 			<div class="contact bas">
 				<h3>Contact</h3>
-				<a href="https://www.google.fr" class="rsociaux mail"></a>
+				<a href="mailto:tho-richard@sfr.fr" class="rsociaux mail"></a>
 				<a href="https://www.facebook.com" class="rsociaux fb"></a>
 				<a href="https://www.google.fr" class="rsociaux twitter"></a>
 				<a href="https://www.google.fr" class="rsociaux linkedin"></a>
@@ -130,12 +136,5 @@ session_start();
 				<p>28 Rue Notre-Dame des Champs, Paris 75006.</p>
 			</div>
 		</footer>
-
-    </body>
+	</body>	
 </html>
-
-<!--
-echo $donnees['Pseudo_membre_inscrit'] . ' , le ';
-		echo $donnees['Date_message'] . ' à ';
-		echo $donnees['Heure_message'] . ' :' . '<br />';
-		echo $donnees['Contenu'] . '<br /><br />'; -->

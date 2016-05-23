@@ -49,7 +49,7 @@
 						}
 						else if (isset($_SESSION['Pseudo'])) {
 							?>
-							<?php echo($_SESSION['Pseudo']) ?>
+							<a href="administrateur.php" class="lienpseudo"><?php echo($_SESSION['Pseudo']) ?></a>
 							<a href="deconnexion.php" class="button">Déconnexion</a>
 							<?php
 						}
@@ -60,6 +60,7 @@
 			<div class="menu haut">
 				<a href="administrateur.php" class="button2">Espace Administrateur</a>
 				<a href="gestionmembres.php" class="button2">Gestion Membres</a>
+				<a href="gestiongroupes.php" class="button2">Gestion Groupes</a>
 				<a href="forumadmin.php" class="button2">Gestion Forum</a>
 				<a href="faqadmin.php" class="button2">Gestion FAQ</a>
 			</div> 			

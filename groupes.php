@@ -1,4 +1,5 @@
 <?php
+session_start();
 			if (isset($_POST['creer']) && $_POST['creer'] == 'Créer') {
 
 			    if ((isset($_POST['nomgroupe']) && !empty($_POST['nomgroupe'])) && (isset($_POST['choixsport']) && !empty($_POST['choixsport'])) && (isset($_POST['choixville']) && !empty($_POST['choixville'])) && (isset($_POST['descriptif'])  && !empty($_POST['descriptif'])) ) {
@@ -29,6 +30,7 @@
 			}
 		?>
 
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -48,7 +50,6 @@
 				<div class="connexion element"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
 				<div class="connexion droite element">
 					<?php
-						session_start();
 						if (!isset($_SESSION['Pseudo'])) {
 							?>
 							<a href="inscription.php" class="button">Inscription</a>
@@ -163,12 +164,11 @@
 					{ ?>
 
 						<div class="groupestrouves">
-						<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<br/><a href="pagemutablegroupe.php?Titregroupe=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
-						echo $donnees['Zone_geographique']. '<br/>';
+						echo $donnees['Zone_geographique']. '<br/>' . '<br/>';
 						?>
-						<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
 						</div>
 					
 					<?php
@@ -186,12 +186,11 @@
 					{ ?>
 
 						<div class="groupestrouves">
-						<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<br/><a href="pagemutablegroupe.php?Titregroupe=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
-						echo $donnees['Zone_geographique']. '<br/>';
+						echo $donnees['Zone_geographique']. '<br/>' . '<br/>';
 						?>
-						<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
 						</div>
 					
 					<?php
@@ -209,12 +208,11 @@
 					{ ?>
 
 						<div class="groupestrouves">
-						<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<br/><a href="pagemutablegroupe.php?Titregroupe=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
-						echo $donnees['Zone_geographique']. '<br/>';
+						echo $donnees['Zone_geographique']. '<br/>' . '<br/>';
 						?>
-						<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
 						</div>
 					
 					<?php
@@ -250,12 +248,11 @@
 							{ ?>
 
 								<div class="groupestrouves">
-								<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+								<br/><a href="pagemutablegroupe.php?Titregroupe=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 								<?php 
 								echo $donnees['Descriptif'] . '<br/>';
-								echo $donnees['Zone_geographique']. '<br/>';
+								echo $donnees['Zone_geographique']. '<br/>' . '<br/>';
 								?>
-								<input type="submit" name="rejoindre" value="Rejoindre" class="button3">
 								</div>
 							
 							<?php
@@ -276,7 +273,7 @@
 							{ ?>
 
 								<div class="groupestrouves">
-								<br/><a href="http://www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+								<br/><a href="pagemutablegroupe.php?Titregroupe=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 								<?php 
 								echo $donnees['Descriptif'] . '<br/>';
 								echo $donnees['Zone_geographique']. '<br/>'. '<br/>';

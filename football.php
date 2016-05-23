@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,7 +22,6 @@
 				<div class="connexion element"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
 				<div class="connexion droite element">
 					<?php
-						session_start();
 						if (!isset($_SESSION['Pseudo'])) {
 							?>
 							<a href="inscription.php" class="button">Inscription</a>

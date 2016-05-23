@@ -52,15 +52,49 @@
 
 		<div class="profil">
 			<div class="profilcolonne">
-				<p class="profilnom info1">Bonjour <?php echo htmlentities(trim($_SESSION['Prenom']));?> <?php echo htmlentities(trim($_SESSION['Nom'])); ?> </p>
-				<p class="profilpseudo info1">Votre Pseudo est <?php echo htmlentities(trim($_SESSION['Pseudo'])); ?>! </p>
-				<p class="profilnaissance info1">Vous êtes né(e) le <?php echo htmlentities(trim($_SESSION['Date_naissance'])); ?>. </p>
-				<p class="profilmail info1">Votre mail est <?php echo htmlentities(trim($_SESSION['Mail'])); ?>. </p>
-				<p class="profiladresse info1">Vous habitez au <?php echo htmlentities(trim($_SESSION['Adresse'])); ?>. </p><br />
+				<p class="profilnom info1">Bonjour <?php echo $_SESSION['Prenom'];?> <?php echo $_SESSION['Nom']; ?> </p>
+				<p class="profilpseudo info1">Votre Pseudo est <?php echo $_SESSION['Pseudo']; ?>! </p>
+				<p class="profilnaissance info1">Vous êtes né(e) le <?php echo $_SESSION['Date_naissance']; ?>. </p>
+				<p class="profilmail info1">Votre mail est <?php echo $_SESSION['Mail']; ?>. </p>
+				<p class="profiladresse info1">Vous habitez au <?php echo $_SESSION['Adresse']; ?>. </p><br />
 				<p><a href="modifmembre.php" class="profilmodification info1">Modifier vos informations personnelles</a></p>
 				<p><a href="messagerie.php" class="lienmessagerie info1">Lien vers votre messagerie Messagerie</a></p>
 			</div>
-			<img class="profilphoto profilcolonne" src=<?php echo htmlentities(trim($_SESSION['Photo'])); ?> />
+			<img class="profilphoto profilcolonne" src=<?php echo $_SESSION['Photo']; ?> />
+		</div>
+
+
+		<div class="mesgroupes">
+			<?php
+			try
+				{
+					$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+				}
+				catch(Exception $e)
+				{
+	       			die('Erreur : '.$e->getMessage());
+				}
+
+			$reponse = $base->query('SELECT Titre_groupe FROM appartenance_groupe WHERE Pseudo_membre_inscrit="'.$_SESSION['Pseudo'].'"');
+
+			while ($donnees = $reponse->fetch())
+					{ ?>
+						<?php 
+						echo $donnees['Titre_groupe'] . '<br/>';
+						?>
+					
+					<?php
+					}
+
+					$reponse->closeCursor();
+
+			?>
+
+		</div>
+
+
+		<div class="mesgroupesleader">
+
 		</div>
 
 

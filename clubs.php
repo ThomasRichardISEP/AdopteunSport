@@ -1,4 +1,5 @@
 <?php
+session_start();
 			if (isset($_POST['creer']) && $_POST['creer'] == 'Créer') {
 
 			    if ((isset($_POST['nomclub']) && !empty($_POST['nomclub'])) && (isset($_POST['choixsport']) && !empty($_POST['choixsport'])) && (isset($_POST['choixville']) && !empty($_POST['choixville'])) && (isset($_POST['descriptif'])  && !empty($_POST['descriptif'])) ) {
@@ -48,7 +49,6 @@
 				<div class="connexion element"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
 				<div class="connexion droite element">
 					<?php
-						session_start();
 						if (!isset($_SESSION['Pseudo'])) {
 							?>
 							<a href="inscription.php" class="button">Inscription</a>
@@ -168,7 +168,7 @@
 					{ ?>
 
 						<div class="clubville">
-						<a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<a href="pagemutableclub.php?Titreclub=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
 						echo $donnees['Zone_geographique'];
@@ -192,7 +192,7 @@
 					{ ?>
 
 						<div class="clubville">
-						<a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<a href="pagemutableclub.php?Titreclub=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
 						echo $donnees['Zone_geographique'];
@@ -216,7 +216,7 @@
 					{ ?>
 
 						<div class="clubville">
-						<a href="www.google.com"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<a href="pagemutableclub.php?Titreclub=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
 						<?php 
 						echo $donnees['Descriptif'] . '<br/>';
 						echo $donnees['Zone_geographique'];
