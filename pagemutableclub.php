@@ -17,7 +17,7 @@ session_start();
 		$data = $req->fetch();
 
 		if ($data[0] == 0) {
-			$sql = 'INSERT INTO appartenance_club(Pseudo_membre_inscrit, Titre_club) VALUES("'.$_SESSION['Pseudo'].'", "'.$club.'")';
+			$sql = 'INSERT INTO appartenance_club(Pseudo_membre_inscrit, Titre_club, Date_inscription) VALUES("'.$_SESSION['Pseudo'].'", "'.$club.'", CURDATE())';
 			$base->query($sql);
 		}
 

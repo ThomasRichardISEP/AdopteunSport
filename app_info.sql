@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2016 at 09:56 AM
+-- Generation Time: May 23, 2016 at 10:15 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -23,30 +23,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `administrateur`
---
-
-CREATE TABLE IF NOT EXISTS `administrateur` (
-  `Pseudo` varchar(255) NOT NULL,
-  `Nom` varchar(255) NOT NULL,
-  `Mail` varchar(255) NOT NULL,
-  `Role` varchar(5000) NOT NULL,
-  PRIMARY KEY (`Pseudo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `appartenance_club`
 --
 
 CREATE TABLE IF NOT EXISTS `appartenance_club` (
   `Pseudo_membre_inscrit` varchar(255) NOT NULL,
   `Titre_club` varchar(255) NOT NULL,
-  `Date` date NOT NULL,
-  `Heure` time NOT NULL,
+  `Date_inscription` date NOT NULL,
   PRIMARY KEY (`Pseudo_membre_inscrit`,`Titre_club`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `appartenance_club`
+--
+
+INSERT INTO `appartenance_club` (`Pseudo_membre_inscrit`, `Titre_club`, `Date_inscription`) VALUES
+('ElyesMzabi', 'PSG', '0000-00-00'),
+('ThomasRichard', 'LOSC', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -57,8 +50,18 @@ CREATE TABLE IF NOT EXISTS `appartenance_club` (
 CREATE TABLE IF NOT EXISTS `appartenance_groupe` (
   `Pseudo_membre_inscrit` varchar(255) NOT NULL,
   `Titre_groupe` varchar(255) NOT NULL,
+  `Date_inscription` date NOT NULL,
   PRIMARY KEY (`Pseudo_membre_inscrit`,`Titre_groupe`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `appartenance_groupe`
+--
+
+INSERT INTO `appartenance_groupe` (`Pseudo_membre_inscrit`, `Titre_groupe`, `Date_inscription`) VALUES
+('', 'groupetest', '0000-00-00'),
+('ElyesMzabi', 'Club de foot pour les nuls', '0000-00-00'),
+('ThomasRichard', 'groupetest', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -74,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `club` (
   `Nb_max_personnes` int(11) NOT NULL,
   `Photo` varchar(255) NOT NULL,
   `Pseudo_membre_createur` varchar(255) NOT NULL,
-  `Date` date NOT NULL,
+  `Date_creation` date NOT NULL,
   `Heure` time NOT NULL,
   PRIMARY KEY (`Titre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -83,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `club` (
 -- Dumping data for table `club`
 --
 
-INSERT INTO `club` (`Titre`, `Sport`, `Descriptif`, `Zone_geographique`, `Nb_max_personnes`, `Photo`, `Pseudo_membre_createur`, `Date`, `Heure`) VALUES
+INSERT INTO `club` (`Titre`, `Sport`, `Descriptif`, `Zone_geographique`, `Nb_max_personnes`, `Photo`, `Pseudo_membre_createur`, `Date_creation`, `Heure`) VALUES
 ('LilleHand', 'Handball', 'Club de Handball', 'Lille', 0, '', '', '0000-00-00', '00:00:00'),
 ('LOSC', 'Football', 'Club de football', 'Lille', 0, '', '', '0000-00-00', '00:00:00'),
 ('Lyon Handball', 'Handball', 'Club de Handball', 'Lyon', 0, '', '', '0000-00-00', '00:00:00'),
@@ -116,20 +119,15 @@ CREATE TABLE IF NOT EXISTS `faq` (
   `Question` varchar(5000) NOT NULL,
   `Reponse` varchar(5000) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `faq`
 --
 
 INSERT INTO `faq` (`Id`, `Question`, `Reponse`) VALUES
-(3, 'Comment s''inscrire sur Adopte un Sport?', 'Cliquez sur le bouton "Inscription" en haut à droite des pages du site.'),
-(4, 'Comment se connecter à sa page personnelle?', 'Cliquez sur le bouton "Connexion" en haut à droite des pages du site, puis saisissez vos identifiants.'),
-(5, 'Comment rechercher un club de sport en fonction de la ville voulue?', 'Rendez-vous sur la page "Club", puis saisissez la ville que vous désirez dans la barre de recherche.'),
-(6, 'Comment rechercher un club de sport en fonction du voulu?', 'Rendez-vous sur la page "Sports", puis saisissez le sport que vous désirez dans la barre de recherche.'),
-(7, 'Question 1: Comment se connecter?', 'Rendez-vous sur la page "Club", puis saisissez la ville que vous désirez dans la barre de recherche.'),
-(8, 'test', 'test'),
-(9, 'test2', 'test2');
+(9, 'question 1', 'reponse 1'),
+(14, 'Question 3', 'reponse 3');
 
 -- --------------------------------------------------------
 
@@ -148,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `groupe` (
   `Pseudo_membre_createur` varchar(255) NOT NULL,
   `Date_creation` date NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `groupe`
@@ -160,7 +158,9 @@ INSERT INTO `groupe` (`Id`, `Titre`, `Descriptif`, `Zone_geographique`, `Nb_max_
 (3, 'Club de thomas', 'Club de football', 'Lille', 10, '', 'Football', 'ThomasRichard', '2016-05-11'),
 (4, 'Club de toto', 'Club de football', 'Lyon', 10, '', 'Football', 'ThomasRichard', '2016-05-11'),
 (5, 'Club de hand fort', 'Club de handball', 'Lille', 14, '', 'Handball', 'ThomasRichard', '2016-05-11'),
-(6, 'Club de hand nul', 'Club de handball', 'Paris', 23, '', 'Handball', 'ThomasRichard', '2016-05-11');
+(6, 'Club de hand nul', 'Club de handball', 'Paris', 23, '', 'Handball', 'ThomasRichard', '2016-05-11'),
+(7, 'groupetest', 'Club de football', 'Lille', 12, '', 'football', 'ThomasRichard', '2016-05-19'),
+(8, 'grpadmin', 'Club de football', 'Lille', 20, '', 'Football', 'Administrateur1', '2016-05-23');
 
 -- --------------------------------------------------------
 
@@ -176,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `membre_inscrit` (
   `Date_naissance` date NOT NULL,
   `Mail` varchar(255) NOT NULL,
   `Adresse` varchar(255) NOT NULL,
+  `Ville` varchar(255) NOT NULL,
   `Photo` varchar(255) NOT NULL,
   `Administrateur` int(11) NOT NULL,
   PRIMARY KEY (`Pseudo`)
@@ -185,15 +186,15 @@ CREATE TABLE IF NOT EXISTS `membre_inscrit` (
 -- Dumping data for table `membre_inscrit`
 --
 
-INSERT INTO `membre_inscrit` (`Pseudo`, `mdp`, `Nom`, `Prenom`, `Date_naissance`, `Mail`, `Adresse`, `Photo`, `Administrateur`) VALUES
-('Administrateur1', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Richard', 'Thomas', '1995-04-25', 'tho-richard@sfr.fr', '28 rue Notre-Dame des Champs Paris', 'Images/photothomas.jpg', 1),
-('ElyesMzabi', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Mzabi', 'Elyes', '1995-11-11', 'elyes.mzabi@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Images/utilisateur.png', 0),
-('FelixWlody', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Wlody', 'Félix', '1995-11-11', 'felix.wlody@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Images/utilisateur.png', 0),
-('MehdiTouati', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Touati', 'Mehdi', '1995-11-11', 'mehdi.touati@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Images/utilisateur.png', 0),
-('MickaelPetit', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Petit', 'Mickael', '1995-11-11', 'mickael.petit@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Images/utilisateur.png', 0),
-('NithusanRaveendran', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Raveendran', 'Nithusan', '1995-11-07', 'nithusan.raveendran@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Images/utilisateur.png', 0),
-('ThomasRichard', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Richard', 'Thomas', '1995-04-25', 'thomas.richard@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Images/photothomas.jpg', 0),
-('VincentBoutsry', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Boutsry', 'Vincent', '1995-11-11', 'vincent.boutsry@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Images/utilisateur.png', 0);
+INSERT INTO `membre_inscrit` (`Pseudo`, `mdp`, `Nom`, `Prenom`, `Date_naissance`, `Mail`, `Adresse`, `Ville`, `Photo`, `Administrateur`) VALUES
+('Administrateur1', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Richard', 'Thomas', '1995-04-25', 'tho-richard@sfr.fr', '28 rue Notre-Dame des Champs Paris', 'Paris', 'Images/photothomas.jpg', 1),
+('ElyesMzabi', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Mzabi', 'Elyes', '1995-11-11', 'elyes.mzabi@isep.fr', '28 rue Notre-Dame des Champs Paris', 'paris', 'Images/utilisateur.png', 0),
+('FelixWlody', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Wlody', 'Félix', '1995-11-11', 'felix.wlody@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Paris', 'Images/utilisateur.png', 0),
+('MehdiTouati', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Touati', 'Mehdi', '1995-11-11', 'mehdi.touati@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Paris', 'Images/utilisateur.png', 0),
+('MickaelPetit', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Petit', 'Mickael', '1995-11-11', 'mickael.petit@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Paris', 'Images/utilisateur.png', 0),
+('NithusanRaveendran', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Raveendran', 'Nithusan', '1995-11-07', 'nithusan.raveendran@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Paris', 'Images/utilisateur.png', 0),
+('ThomasRichard', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Richard', 'Thomas', '1995-04-25', 'thomas.richard@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Lille', 'Images/photothomas.jpg', 0),
+('VincentBoutsry', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0', 'Boutsry', 'Vincent', '1995-11-11', 'vincent.boutsry@isep.fr', '28 rue Notre-Dame des Champs Paris', 'Lyon', 'Images/utilisateur.png', 0);
 
 -- --------------------------------------------------------
 
@@ -231,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `Heure_message` time NOT NULL,
   `Pseudo_membre_inscrit` varchar(255) NOT NULL,
   PRIMARY KEY (`Id_message`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `messages`
@@ -244,13 +245,7 @@ INSERT INTO `messages` (`Id_message`, `Contenu`, `Date_message`, `Heure_message`
 (29, 'Je viens de me connecter sur Adopte un Sport!', '2016-05-05', '22:17:33', 'MickaelPetit'),
 (30, 'Je peux trouver des clubs proche de chez moi!', '2016-05-05', '22:18:14', 'NithusanRaveendran'),
 (31, 'Je profite pleinement de toutes les fonctionnalités de ce site!', '2016-05-05', '22:18:43', 'MehdiTouati'),
-(32, 'Ce site m''est très utile pour pratiquer un sport avec de nouvelles personnes!', '2016-05-05', '22:19:26', 'VincentBoutsry'),
-(33, 'test', '2016-05-06', '10:44:44', 'Elyesmzabi'),
-(34, 'coucou', '2016-05-09', '19:08:38', 'ThomasRichard'),
-(35, 'test', '2016-05-09', '19:09:25', 'ThomasRichard'),
-(36, 'test2', '2016-05-09', '19:26:34', 'ElyesMzabi'),
-(37, 'test', '2016-05-09', '19:32:25', 'MickaelPetit'),
-(38, 'vere', '2016-05-10', '09:20:06', 'ThomasRichard');
+(32, 'Ce site m''est très utile pour pratiquer un sport avec de nouvelles personnes!', '2016-05-05', '22:19:26', 'VincentBoutsry');
 
 -- --------------------------------------------------------
 

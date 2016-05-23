@@ -82,7 +82,7 @@
         
 
         <div class="connexiondiv">
-        <form action="pageconnection.php" method="post">
+        <form action="pageconnexionadmin.php" method="post">
 			<h3>Connexion à l'espace administrateur :</h3>
             <form action="index.php" method="post">
             Pseudo : <input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"><br />

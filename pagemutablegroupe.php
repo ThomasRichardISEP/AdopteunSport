@@ -17,7 +17,7 @@ session_start();
 		$data = $req->fetch();
 
 		if ($data[0] == 0) {
-			$sql = 'INSERT INTO appartenance_groupe(Pseudo_membre_inscrit, Titre_groupe) VALUES("'.$_SESSION['Pseudo'].'", "'.$grp.'")';
+			$sql = 'INSERT INTO appartenance_groupe(Pseudo_membre_inscrit, Titre_groupe, Date_inscription) VALUES("'.$_SESSION['Pseudo'].'", "'.$grp.'", CURDATE())';
 			$base->query($sql);
 		}
 
