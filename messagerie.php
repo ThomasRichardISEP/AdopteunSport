@@ -26,7 +26,7 @@
 	        }
 	        ?>
 
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset='utf8' />
@@ -79,7 +79,7 @@
 	            	Prénom destinataire : <input type="text" name="prenomdestinataire" value="<?php if (isset($_POST['prenomdestinataire'])) echo htmlentities(trim($_POST['prenomdestinataire'])); ?>"><br />
 	            	Nom destinataire : <input type="text" name="nomdestinataire" value="<?php if (isset($_POST['nomdestinataire'])) echo htmlentities(trim($_POST['nomdestinataire'])); ?>"><br />
 	            	Message : <input type="text" name="message" value="<?php if (isset($_POST['message'])) echo htmlentities(trim($_POST['message'])); ?>"><br />
-	            	<input type="submit" name="envoyer" value="Envoyer" class="button2">
+	            	<input type="submit" name="envoyer" value="Envoyer" class="button3">
 	       		</form>
 	       	</div>
 

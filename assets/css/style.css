@@ -38,8 +38,9 @@ input{
 
 
 .lienpartage{
-	border-radius: 10px;
-	height: 25px;
+	border-radius: 4px;
+	height: 30px;
+	display: inline-block;
 }
 
 
@@ -150,16 +151,15 @@ input{
 
 .gestiongroupesadmin{
 	display: inline-block;
-	text-align: center;
-	background-color: rgb(150,150,150);
-	width: 40%;
-	margin-left: 4%;
-	margin-right: 4%;
 	margin-top: 10%;
-	margin-bottom: 1%;
+	margin-bottom: 0%;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	text-align: center;
 	border: solid black 2px;
 	border-radius: 10px;
-	vertical-align: middle;
+	background-color: rgb(150,150,150);
 }
 
 
@@ -167,9 +167,9 @@ input{
 	display: inline-block;
 	text-align: center;
 	background-color: rgb(150,150,150);
-	width: 40%;
-	margin-left: 4%;
-	margin-right: 4%;
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
 	margin-top: 10%;
 	margin-bottom: 1%;
 	border: solid black 2px;
@@ -182,6 +182,20 @@ input{
 	margin-top: 1%;
 	width: 100%;
 	display: inline-block;
+}
+
+
+.ajoutermembre{
+	display: inline-block;
+	margin-top: 10%;
+	margin-bottom: 0%;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	text-align: center;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(150,150,150);
 }
 
 
@@ -203,13 +217,26 @@ input{
 	display: inline-block;
 	text-align: center;
 	background-color: rgb(150,150,150);
-	width: 40%;
-	margin-left: 4%;
-	margin-right: 4%;
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
 	margin-top: 10%;
 	margin-bottom: 1%;
 	border: solid black 2px;
 	border-radius: 10px;
+}
+
+
+.contenu{
+	width: 90%;
+	height: 5%;
+	padding: 12px 20px;
+    margin: 1%;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: none;
 }
 
 
@@ -246,6 +273,7 @@ input{
 .profilphoto{
 	float: right;
 	height: 300px;
+	border-radius: 10px;
 }
 
 
@@ -265,6 +293,65 @@ input{
 
 /* Page modifmembre */
 .modificationdiv{
+	display: inline-block;
+	margin-top: 10%;
+	margin-bottom: 3%;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	text-align: center;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(150,150,150);
+}
+
+
+.liencreaevent{
+	display: inline-block;
+	margin-top: 0%;
+	margin-bottom: 4%;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	text-align: center;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(150,150,150);
+}
+
+
+/* Page Event */
+.creationevent{
+	display: inline-block;
+	margin-top: 10%;
+	margin-bottom: 3%;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	text-align: center;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(150,150,150);
+}
+
+
+/* Page Suppression Membre */
+.suppressionmembre{
+	display: inline-block;
+	margin-top: 10%;
+	margin-bottom: 3%;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	text-align: center;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(150,150,150);
+}
+
+
+/* Page Suppresion Post */
+.suppressionpost{
 	display: inline-block;
 	margin-top: 10%;
 	margin-bottom: 3%;
@@ -380,6 +467,54 @@ input{
 }
 
 
+.donneravisclub{
+	display:inline-block;
+	margin:10%;
+	margin-top: 1%;
+	margin-bottom: 3%;
+	width: 80%;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(150,150,150);
+	text-indent: 30px;
+}
+
+
+.avisclub{
+	display:inline-block;
+	margin:10%;
+	margin-top: 1%;
+	margin-bottom: 3%;
+	width: 80%;
+	border: solid black 2px;
+	border-radius: 10px;
+	background-color: rgb(150,150,150);
+	text-indent: 30px;
+}
+
+
+.commentaire{
+	width: 90%;
+	height: 100px;
+	padding: 12px 20px;
+    margin: 1%;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: none;
+}
+
+
+.note{
+
+    padding: 8px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+
 /* Page Groupes */
 .groupe{
 	display: inline-block;
@@ -435,27 +570,6 @@ input{
 	margin-right: 1%;
 	text-align: center;
 	display: inline-block;
-}
-
-
-#creer {
-    background-color: rgb(60,60,60);
-    border: solid black 1px;
-    border-radius: 10px;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 10px 8px;
-    cursor: pointer;
-    opacity: 0.8;
-}
-
-
-#creer:hover{
-	color: grey;
 }
 
 
@@ -526,6 +640,9 @@ input{
 	border: solid black 2px;
 	background-color: rgb(150,150,150);
 	border-radius: 10px;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
 }
 
 
@@ -599,170 +716,3 @@ input{
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
-
-
-#valider {
-    background-color: rgb(60,60,60);
-    border: solid black 1px;
-    border-radius: 10px;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 10px 8px;
-    cursor: pointer;
-    opacity: 0.8;
-}
-
-
-#valider:hover{
-	color: grey;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-.ligne1{
-	display: inline-block;
-	margin-top: 130px;
-	margin-bottom: 25px;
-	width: 100%;
-	text-align: center;
-}
-
-
-.ligne2{
-	display: inline-block;
-	margin-top: 25px;
-	margin-bottom: 25px;
-	width: 100%;
-	text-align: center;
-}
-
-
-.ligne3{
-	display: inline-block;
-	margin-top: 25px;
-	margin-bottom: 25px;
-	width: 100%;
-	text-align: center;
-}
-
-
-.ligne4{
-	display: inline-block;
-	margin-top: 25px;
-	margin-bottom: 50px;
-	width: 100%;
-	text-align: center;
-}
-
-
-.sportaccueil{
-    border: solid black 3px;
-    border-radius: 10px;
-    color: orange;
-    padding: 40px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    margin-right: 5%;
-    margin-left: 5%;
-    height: 30px;
-    width: 10%;
-}
-
-
-.sportaccueil:hover{
-	color:blue;
-}
-
-
-.foot{
-	background-image: url('Images/footnb.jpg');
-	background-size:100% 100%;
-}
-
-
-.foot:hover{
-	background-image: url('Images/foot.jpg');
-	background-size:100% 100%;
-}
-
-
-.basket{
-	background-image: url('Images/basketnb.jpg');
-	background-size:100% 100%;
-}
-
-
-.basket:hover{
-	background-image: url('Images/basket.jpg');
-	background-size:100% 100%;
-}
-
-
-.rugby{
-	background-image: url('Images/rugbynb.jpg');
-	background-size:100% 100%;
-}
-
-
-.rugby:hover{
-	background-image: url('Images/rugby.jpg');
-	background-size:100% 100%;
-}
-
-
-.tennis{
-	background-image: url('Images/tennisnb.jpg');
-	background-size:100% 100%;
-}
-
-
-.tennis:hover{
-	background-image: url('Images/tennis.jpg');
-	background-size:100% 100%;
-}
-
-
-.badminton{
-	background-image: url('Images/badmintonnb.jpg');
-	background-size:100% 100%;
-}
-
-
-.badminton:hover{
-	background-image: url('Images/badminton.jpg');
-	background-size:100% 100%;
-}
-
-
-.pingpong{
-	background-image: url('Images/pingpongnb.jpg');
-	background-size:100% 100%;
-}
-
-
-.pingpong:hover{
-	background-image: url('Images/pingpong.jpg');
-	background-size:100% 100%;
-}
-
-
-*/

@@ -93,7 +93,7 @@ session_start();
 			        		<input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
 			        		<input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
 			        	</div>
-					    <input type="submit" name="valider" value="Valider" id="valider">
+					    <input type="submit" name="valider" value="Valider" class="button3">
 			    	</form>
     			</div>
 
@@ -116,7 +116,7 @@ session_start();
 			        		<input type="text" name="nbmembres" placeholder="Entrez un nombre de membres" value="<?php if (isset($_POST['nbmembres'])) echo htmlentities(trim($_POST['nbmembres'])); ?>"/><br />
 			        		<input type="text" name="photo" placeholder="Entrez une photo" value="<?php if (isset($_POST['photo'])) echo htmlentities(trim($_POST['photo'])); ?>"/><br />
 			        	</div>			        		
-					        <input type="submit" name="creer" value="Créer" id="creer">
+					        <input type="submit" name="creer" value="Créer" class="button3">
 						
 			    	</form>
     			</div>
@@ -137,7 +137,7 @@ session_start();
 			        		<input type="text" name="sport" placeholder="Entrez un sport" value="<?php if (isset($_POST['sport'])) echo htmlentities(trim($_POST['sport'])); ?>"/><br />
 			        		<input type="text" name="ville" placeholder="Entrez une ville" value="<?php if (isset($_POST['ville'])) echo htmlentities(trim($_POST['ville'])); ?>"/><br />
 			        	</div>
-					    <input type="submit" name="valider" value="Valider" id="valider">
+					    <input type="submit" name="valider" value="Valider" class="button3">
 			    	</form>
     			</div>
     		<?php
@@ -157,6 +157,10 @@ session_start();
 					}
 
 				if ( (isset($_POST['ville']) && !empty($_POST['ville'])) && (isset($_POST['sport']) && empty($_POST['sport'])) ) {
+
+					?>
+						<h3 class="grouperecent">Groupes trouvés</h3>
+					<?php
 
 					$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique FROM groupe WHERE Zone_geographique="'.$_POST['ville'].'"');
 
@@ -180,6 +184,10 @@ session_start();
 
 				else if ( (isset($_POST['sport']) && !empty($_POST['sport'])) && (isset($_POST['ville']) && empty($_POST['ville'])) ) {
 
+					?>
+						<h3 class="grouperecent">Groupes trouvés</h3>
+					<?php
+
 					$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique FROM groupe WHERE Nom_sport="'.$_POST['sport'].'"');
 	
 					while ($donnees = $reponse->fetch())
@@ -201,6 +209,10 @@ session_start();
 				}
 
 				else if ((isset($_POST['sport']) && !empty($_POST['sport'])) && (isset($_POST['ville']) && !empty($_POST['ville'])) ) {
+
+					?>
+						<h3 class="grouperecent">Groupes trouvés</h3>
+					<?php
 
 					$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique FROM groupe WHERE Nom_sport="'.$_POST['sport'].'" AND Zone_geographique="'.$_POST['ville'].'"');
 	

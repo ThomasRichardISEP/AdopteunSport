@@ -56,7 +56,7 @@
 				<p class="profilpseudo info1">Votre Pseudo est <?php echo $_SESSION['Pseudo']; ?>! </p>
 				<p class="profilnaissance info1">Vous êtes né(e) le <?php echo $_SESSION['Date_naissance']; ?>. </p>
 				<p class="profilmail info1">Votre mail est <?php echo $_SESSION['Mail']; ?>. </p>
-				<p class="profiladresse info1">Vous habitez au <?php echo $_SESSION['Adresse']; ?>. </p><br />
+				<p class="profiladresse info1">Vous habitez au <?php echo $_SESSION['Adresse']; ?> à <?php echo $_SESSION['Ville']; ?>. </p><br />
 				<p><a href="modifmembre.php" class="profilmodification info1">Modifier vos informations personnelles</a></p>
 				<p><a href="messagerie.php" class="lienmessagerie info1">Lien vers votre messagerie Messagerie</a></p>
 			</div>
@@ -64,38 +64,58 @@
 		</div>
 
 
-		<div class="mesgroupes">
-			<?php
-			try
-				{
-					$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-				}
-				catch(Exception $e)
-				{
-	       			die('Erreur : '.$e->getMessage());
-				}
+		<h3 class="grouperecent">Groupes auxquels je suis inscrit :</h3>
 
-			$reponse = $base->query('SELECT Titre_groupe FROM appartenance_groupe WHERE Pseudo_membre_inscrit="'.$_SESSION['Pseudo'].'"');
+		<?php
+		try
+			{
+				$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+	   			die('Erreur : '.$e->getMessage());
+			}
 
-			while ($donnees = $reponse->fetch())
-					{ ?>
-						<?php 
-						echo $donnees['Titre_groupe'] . '<br/>';
-						?>
-					
-					<?php
-					}
+		$reponse = $base->query('SELECT Titre_groupe FROM appartenance_groupe WHERE Pseudo_membre_inscrit="'.$_SESSION['Pseudo'].'"');
 
-					$reponse->closeCursor();
-
+		while ($donnees = $reponse->fetch()){ 
 			?>
+			<div class="groupestrouves">
+				<br/><a href="pagemutablegroupe.php?Titregroupe=<?php echo $donnees['Titre_groupe']; ?>"><?php echo $donnees['Titre_groupe'] . '<br/>'; ?></a><br/>
+			</div>	
+					
+			<?php
+			}
+					
+			$reponse->closeCursor();
+		?>
+		
 
-		</div>
+		<br/><br/><h3 class="grouperecent">Groupes dont je suis le leader :</h3>
 
+		<?php
+		try
+			{
+				$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+	   			die('Erreur : '.$e->getMessage());
+			}
 
-		<div class="mesgroupesleader">
+		$reponse = $base->query('SELECT Titre FROM groupe WHERE Pseudo_membre_createur="'.$_SESSION['Pseudo'].'"');
 
-		</div>
+		while ($donnees = $reponse->fetch()){ 
+			?>
+			<div class="groupestrouves">
+				<br/><a href="modifgroupeleader.php?Titregroupe=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a><br/>
+			</div>	
+					
+			<?php
+			}
+					
+			$reponse->closeCursor();
+		?>
 
 
 		<footer>
@@ -127,3 +147,13 @@
 		</footer>
 	</body>
 </html>
+
+
+<!--
+<?php 
+		echo $donnees['Titre_groupe'] . '<br/>';
+		?>
+
+		<div class="mesgroupes">
+
+			</div> -->

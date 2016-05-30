@@ -29,6 +29,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 
         session_start();
         $_SESSION['Pseudo'] = $_POST['login'];
+        $_SESSION['Mdp'] = md5($_POST['pass']);
         $_SESSION['Nom'] = $_POST['nom'];
         $_SESSION['Prenom'] = $_POST['prenom'];
         $_SESSION['Photo'] = $_POST['photo'];
@@ -101,7 +102,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
                 </div>
             
                 Acceptez-vous les <a href="cgu.php" class="liencgu">CGU</a>? <input type="checkbox" name="cgucheckbox" value="cgucheckbox"><br />
-                <input type="submit" name="inscription" value="Inscription" class="button2">
+                <input type="submit" name="inscription" value="Inscription" class="button3">
             </form>
             <?php
                 if (isset($erreur)) echo '<br />',$erreur;

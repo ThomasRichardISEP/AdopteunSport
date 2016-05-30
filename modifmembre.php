@@ -17,12 +17,29 @@
 		            die('Erreur : '.$e->getMessage());
 		        }
 
-		        $req = $bdd->prepare('UPDATE membre_inscrit SET Nom = :test WHERE Pseudo = :coucou ');
-				$req->execute(array(
-					'test'=> $_POST['nom'],
-					'coucou'=>"ThomasRichard"
-					));
+		        $req = $base->prepare('UPDATE membre_inscrit SET Pseudo = ?, Prenom = ?, Nom = ?, Mail = ?, Adresse = ?, Ville = ?, Date_naissance = ?, Photo = ? WHERE Pseudo = ? ');
+				$req->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['mail'], $_POST['adresse'], $_POST['ville'], $_POST['naissance'], $_POST['photo'], $_SESSION['Pseudo']));
 
+				$_SESSION['Pseudo'] = $_POST['login'];
+		        $_SESSION['Nom'] = $_POST['nom'];
+		        $_SESSION['Prenom'] = $_POST['prenom'];
+		        $_SESSION['Photo'] = $_POST['photo'];
+		        $_SESSION['Date_naissance'] = $_POST['naissance'];
+		        $_SESSION['Mail'] = $_POST['mail'];
+		        $_SESSION['Adresse'] = $_POST['adresse'];
+		        $_SESSION['Ville'] = $_POST['ville'];
+
+		        if ((isset($_POST['old_pass']) && md5($_POST['old_pass']) == $_SESSION['Mdp']) && (isset($_POST['pass']) && !empty($_POST['pass'])) && (isset($_POST['pass_confirm']) && !empty($_POST['pass_confirm'])) ) {
+		        	if ($_POST['pass'] == $_POST['pass_confirm']) {
+
+		        		$req = $base->prepare('UPDATE membre_inscrit SET mdp = ? WHERE Pseudo = ? ');
+		        		$req->execute(array(md5($_POST['pass']), $_SESSION['Pseudo']));
+
+		        		$_SESSION['Mdp'] = md5($_POST['pass']);
+		        	}
+		        }
+
+		        header ('Location: membre.php');
 			}
 		?>
 
@@ -75,16 +92,35 @@
 		<div class="modificationdiv">
             <h3>Modification de vos informations :</h3>
             <form action="modifmembre.php" method="post">
-            Pseudo : <input type="text" name="login" value="<?php echo $_SESSION['Pseudo'] ?>"><br />
-            Mot de passe : <input type="password" name="pass" value=""><br />
-            Confirmation du mdp : <input type="password" name="pass_confirm" value=""><br />
-            Prénom : <input type="text" name="prenom" value="<?php echo $_SESSION['Prenom'] ?>"><br />
-            Nom : <input type="text" name="nom" value="<?php echo $_SESSION['Nom'] ?>"><br />
-            Mail : <input type="text" name="mail" value="<?php echo $_SESSION['Mail'] ?>"><br />
-            Adresse : <input type="text" name="adresse" value="<?php echo $_SESSION['Adresse'] ?>"><br />
-            Date de naissance : <input type="date" name="naissance" value="<?php echo $_SESSION['Date_naissance'] ?>"><br />
-            Photo : <input type="text" name="photo" value="<?php echo $_SESSION['Photo'] ?>"><br />
-            <input type="submit" name="valider" value="Valider" class="button2">
+            	<div class="partie colonnegauche">
+            		Pseudo :<br/>
+            		Ancien mot de passe :<br/>
+            		Nouveau mot de passe :<br/>
+            		Confirmation du mdp :<br/>
+            		Prénom :<br/>
+            		Nom :<br/>
+            		Mail :<br/>
+            		Adresse :<br/>
+            		Ville :<br/>
+            		Date de naissance :<br/>
+            		Photo :<br/>
+            	</div>
+
+            	<div class="partie colonnedroite">
+            		<input type="text" name="login" value="<?php echo $_SESSION['Pseudo'] ?>"><br />
+		            <input type="password" name="old_pass" value=""><br />
+		            <input type="password" name="pass" value=""><br />
+		            <input type="password" name="pass_confirm" value=""><br />
+		            <input type="text" name="prenom" value="<?php echo $_SESSION['Prenom'] ?>"><br />
+		            <input type="text" name="nom" value="<?php echo $_SESSION['Nom'] ?>"><br />
+		            <input type="text" name="mail" value="<?php echo $_SESSION['Mail'] ?>"><br />
+		            <input type="text" name="adresse" value="<?php echo $_SESSION['Adresse'] ?>"><br />
+		            <input type="text" name="ville" value="<?php echo $_SESSION['Ville'] ?>"><br />
+		            <input type="date" name="naissance" value="<?php echo $_SESSION['Date_naissance'] ?>"><br />
+		            <input type="text" name="photo" value="<?php echo $_SESSION['Photo'] ?>"><br />
+            	</div>
+           
+            	<input type="submit" name="valider" value="Valider" class="button3">
             </form>
             <?php
                 if (isset($erreur)) echo '<br />',$erreur;

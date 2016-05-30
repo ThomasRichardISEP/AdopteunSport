@@ -6,22 +6,6 @@
 	}
 	?>
 
-<?php
-			if (isset($_POST['suppression']) && $_POST['suppression'] == 'Suppression') {
-				try
-				{
-				$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-				}
-				catch(Exception $e)
-				{
-		        	die('Erreur : '.$e->getMessage());
-				}
-
-				$reponse = $base->query('DELETE FROM groupe WHERE Titre = "'.$_POST['titre'].'"');
-
-			}
-
-		?>
 
 <?php
 			if (isset($_POST['creer']) && $_POST['creer'] == 'Créer') {
@@ -48,11 +32,13 @@
 			        }
 
 			        header('Location: gestiongroupes.php');
-			        
 			    }
-			    
 			}
 		?>
+
+
+
+
 
 <!DOCTYPE html>
 <html>
@@ -117,19 +103,11 @@
 			        		<input type="text" name="nbmembres" placeholder="Entrez un nombre de membres" value="<?php if (isset($_POST['nbmembres'])) echo htmlentities(trim($_POST['nbmembres'])); ?>"/><br />
 			        		<input type="text" name="photo" placeholder="Entrez une photo" value="<?php if (isset($_POST['photo'])) echo htmlentities(trim($_POST['photo'])); ?>"/><br />
 			        	</div>			        		
-					        <input type="submit" name="creer" value="Créer" id="creer">
+					        <input type="submit" name="creer" value="Créer" class="button3">
 						
 			    	</form>
     			</div>
 
-
-		<div class="gestiongroupesadmin">
-            <h3>Supprimer un groupe :</h3>
-            <form action="gestionmembres.php" method="post">
-            	Nom du groupe : <input type="text" name="titre" value="<?php if (isset($_POST['titre'])) echo htmlentities(trim($_POST['titre'])); ?>"><br />
-            	<input type="submit" name="suppression" value="Suppression" id="creer">
-            </form>
-        </div>
 
         <h3 class="listemembres">Liste des groupes du site</h3>
         
@@ -154,13 +132,14 @@
 				{ ?>
 
 					<div class="membrestrouves">
-					<br/><?php echo $donnees['Titre'] . '<br/>';
-					echo $donnees['Descriptif'] . '<br/>';
-					echo $donnees['Zone_geographique'] . '<br/>';
-					echo $donnees['Pseudo_membre_createur']. '<br/>'. '<br/>';
-					?>
+						<br/><a href="pagemutablegroupeadmin.php?Titregroupe=<?php echo $donnees['Titre']; ?>"><?php echo $donnees['Titre'] . '<br/>'; ?></a>
+						<?php
+						echo $donnees['Descriptif'] . '<br/>';
+						echo $donnees['Zone_geographique'] . '<br/>';
+						echo $donnees['Pseudo_membre_createur']. '<br/>'. '<br/>';
+						?>
 					</div>
-					
+
 				<?php
 				}
 

@@ -6,23 +6,6 @@
 	}
 	?>
 
-<?php
-			if (isset($_POST['suppression']) && $_POST['suppression'] == 'Suppression') {
-				try
-				{
-				$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-				}
-				catch(Exception $e)
-				{
-		        	die('Erreur : '.$e->getMessage());
-				}
-
-				$reponse = $base->query('DELETE FROM faq WHERE Id = "'.$_POST['Idquestion'].'"');
-				//$reponse = $base->query('DELETE FROM faq WHERE Id = "'.$papa.'" ');
-
-			}
-
-		?>
 
 <!DOCTYPE html>
 <html>
@@ -72,18 +55,11 @@
 		<div class="faqadmindiv">
 			<h3>Ajouter une question / réponse :</h3>
 			<form action="faq_post.php" method="post" class="faqformulaire">
-		        	<label for="Question">Question</label> : <input type="text" name="Question" id="Question" placeholder="Entrez votre question" /><br/>
-		        	<label for="Reponse">Réponse</label> :  <input type="text" name="Reponse" id="Reponse" placeholder="Entrez votre réponse" /><br />
-				    <input type="submit" value="Envoyer" id="valider" />
-		    </form>
-		</div>
-
-
-		<div class="faqadmindiv">
-			<h3>Supprimer une question :</h3>
-			<form action="faqadmin.php" method="post">
-		        <label for="Id">Id de la question</label> : <input type="text" name="Idquestion" id="Idquestion" placeholder="Entrez l'Id de la question" /><br/>
-				<input type="submit" name="suppression" value="Suppression" id="creer">
+		        	<label for="Question">Question</label> :<br/>
+		        	<textarea name="Question" class="contenu" placeholder="Entrez votre question"></textarea><br />
+		        	<label for="Reponse">Réponse</label> :<br />
+				    <textarea name="Reponse" class="contenu" placeholder="Entrez votre réponse"></textarea><br />
+				    <input type="submit" value="Envoyer" class="button3" />
 		    </form>
 		</div>
 
@@ -112,8 +88,9 @@
 			<div class="question case">
 				<?php 
 				echo $donnees['Question'] . ' ' . '(Id question : ';
-				echo $donnees['Id'] . ')';
+				echo $donnees['Id'] . ') / ';
 				?>
+				<a href="suppressionfaq.php?Idquestion=<?php echo $donnees['Id'] ?>">Supprimer</a>
 			</div>
 			<div class="reponse case">
 				<?php

@@ -24,11 +24,12 @@
             if ($data[0] == 1) {
                 session_start();
 
-                $sql1 = 'SELECT Nom, Prenom, Photo, Date_naissance, Mail, Adresse, Ville, Administrateur FROM membre_inscrit WHERE Pseudo="'.$_POST['login'].'"';
+                $sql1 = 'SELECT Nom, mdp, Prenom, Photo, Date_naissance, Mail, Adresse, Ville, Administrateur FROM membre_inscrit WHERE Pseudo="'.$_POST['login'].'"';
                 $req1 = $base->query($sql1);
                 $data1 = $req1->fetch();
 
                 $_SESSION['Pseudo'] = $_POST['login'];
+                $_SESSION['Mdp'] = $data1['mdp'];
                 $_SESSION['Nom'] = $data1['Nom'];
                 $_SESSION['Prenom'] = $data1['Prenom'];
                 $_SESSION['Photo'] = $data1['Photo'];
@@ -93,7 +94,7 @@
                         <input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"><br />
                         <input type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass'])); ?>"><br />
                     </div>
-                    <input type="submit" name="connecter" value="Connecter" class="button2"><br/><br/>
+                    <input type="submit" name="connecter" value="Connecter" class="button3"><br/><br/>
                     <a href="pageconnexionadmin.php"> -> Connexion administrateur</a>
                <!-- </form> -->
 
