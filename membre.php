@@ -59,6 +59,7 @@
 				<p class="profiladresse info1">Vous habitez au <?php echo $_SESSION['Adresse']; ?> à <?php echo $_SESSION['Ville']; ?>. </p><br />
 				<p><a href="modifmembre.php" class="profilmodification info1">Modifier vos informations personnelles</a></p>
 				<p><a href="messagerie.php" class="lienmessagerie info1">Lien vers votre messagerie Messagerie</a></p>
+				<p><a href="planning.php" class="info1">Lien vers votre planning</a></p>
 			</div>
 			<img class="profilphoto profilcolonne" src=<?php echo $_SESSION['Photo']; ?> />
 		</div>
@@ -147,13 +148,3 @@
 		</footer>
 	</body>
 </html>
-
-
-<!--
-<?php 
-		echo $donnees['Titre_groupe'] . '<br/>';
-		?>
-
-		<div class="mesgroupes">
-
-			</div> -->

@@ -1,19 +1,22 @@
 <?php
-session_start();
-?>
+	session_start();
+	if (!isset($_SESSION['Pseudo'])) {  
+		header ('Location: index.php');
+		exit();
+	}
+	?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset='utf8' />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Aide</title>
-		
-		<!-- Feuille de style -->
-		<link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
-		<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
-		
+		<title>Mon planning</title>
+		<!-- Feuilles de style -->
+	    <link href='assets/css/styleheaderfooter.css' rel='stylesheet' type='text/css' />
+    	<link href='assets/css/style.css' rel='stylesheet' type='text/css' />
 	</head>
+
+
 	<body>
 
 		<header>
@@ -47,57 +50,46 @@ session_start();
 		</header>
 
 
-		<div class="faq">
-			
-			<?php
-		try
-		{
-			$bdd = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		}
-		catch(Exception $e)
-		{
-        	die('Erreur : '.$e->getMessage());
-		}
+		<h3 class="grouperecent" style="margin-top:10%; display:inline-block;">Mon planning</h3>
 
-		// Récupération des 10 derniers messages
-		$reponse = $bdd->query('SELECT Question, Reponse FROM faq ORDER BY Id');
-
-		// Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
-		while ($donnees = $reponse->fetch())
-		{ ?>
-
-			<div class="posts">
-			<div class="question case">
-				<?php 
-				echo $donnees['Question'];
-				?>
-			</div>
-			<div class="reponse case" style="display: none;">
-				<?php
-				echo $donnees['Reponse'] . '<br /><br />';
-				?>
-			</div>
-		</div>
-		
 		<?php
-		}
+			try
+			{
+			$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+	        	die('Erreur : '.$e->getMessage());
+			}
 
-		$reponse->closeCursor();
+			$reponse = $base->query('SELECT Titre_groupe FROM appartenance_groupe WHERE Pseudo_membre_inscrit = "'.$_SESSION['Pseudo'].'" ');
 
-		?>	
+			while ($donnees = $reponse->fetch())
+			{ 
 
-		</div>
+				$reponse2 = $base->prepare('SELECT Nom_event, Groupe, Club, Date_event, Heure_event FROM evenement WHERE Groupe = ? ORDER BY Date_event ');
+				$reponse2->execute(array($donnees['Titre_groupe']));
+				while ($donnees2 = $reponse2->fetch()){
+					?>
+					<div class="membrestrouves">
+						<br/>
+						<?php 
+						echo $donnees2['Nom_event']. '<br/>';
+						echo $donnees2['Groupe']. '<br/>';
+						echo $donnees2['Club']. '<br/>';
+						echo $donnees2['Date_event']. '<br/>';
+						echo $donnees2['Heure_event']. '<br/>';
+						?>
+						<br/>
+					</div>
+					<?php
+				}
+				$reponse2->closeCursor();
+				
+			}
 
-
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js">	// permet d'avoir une action quand on clique sur une question
-		</script>
-		<script type="text/javascript">
-			$(document).ready(function(){ //quand la page est chargé
-				$('.question').click(function(){
-					$(this).next().slideToggle(); //slideToggle pour passer à la question d'en dessous
-				})
-			})
-		</script>
+			$reponse->closeCursor();	
+		?>
 
 
 		<footer>
@@ -113,7 +105,7 @@ session_start();
 
 			<div class="contact bas">
 				<h3>Contact</h3>
-				<a href="https://www.google.fr" class="rsociaux mail"></a>
+				<a href="mailto:tho-richard@sfr.fr" class="rsociaux mail"></a>
 				<a href="https://www.facebook.com" class="rsociaux fb"></a>
 				<a href="https://www.google.fr" class="rsociaux twitter"></a>
 				<a href="https://www.google.fr" class="rsociaux linkedin"></a>
