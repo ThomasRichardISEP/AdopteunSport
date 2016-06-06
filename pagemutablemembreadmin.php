@@ -6,40 +6,21 @@
 	}
 	?>
 
-<?php
-			if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
-				try
-		        {
-		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		        }
-		        catch(Exception $e)
-		        {
-		            die('Erreur : '.$e->getMessage());
-		        }
-
-		        $req = $base->prepare('UPDATE membre_inscrit SET Pseudo = ?, Prenom = ?, Nom = ?, Mail = ?, Adresse = ?, Ville = ?, Date_naissance = ?, Photo = ? WHERE Pseudo = ? ');
-				$req->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['mail'], $_POST['adresse'], $_POST['ville'], $_POST['naissance'], $_POST['photo'], $_POST['login']));
-
-		        header ('Location: gestionmembres.php');
-			}
-		?>
+<?php include_once("model.php"); ?>
 
 <?php
-			if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer le membre') {
-				try
-		        {
-		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		        }
-		        catch(Exception $e)
-		        {
-		            die('Erreur : '.$e->getMessage());
-		        }
-
-		        $reponse = $base->query('DELETE FROM membre_inscrit WHERE Pseudo = "'.$_POST['login'].'"');
-		        header ('Location: gestionmembres.php');
-		    }
+	if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
+		updatemembreadmin($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['mail'], $_POST['adresse'], $_POST['ville'], $_POST['naissance'], $_POST['photo']);
+	}
 ?>
 
+<?php
+	if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer le membre') {
+		supprimermembreadmin($_POST['login']);
+	}
+?>
+
+<?php include("js.php"); ?>
 
 <!DOCTYPE html>
 <html>
@@ -55,51 +36,13 @@
 	</head>
 	<body>
 
-		<header>
-			<div class="container haut">
-				<div class="connexion element"><img class="logosite" src="Images/adopteunsportnb.png" /></div>
-				<div class="connexion droite element">
-					<?php
-						if (!isset($_SESSION['Pseudo'])) {
-							?>
-							<a href="inscription.php" class="button">Inscription</a>
-							<a href="pageconnection.php" class="button">Connexion</a>
-							<?php
-						}
-						else if (isset($_SESSION['Pseudo'])) {
-							?>
-							<a href="administrateur.php" class="lienpseudo"><?php echo($_SESSION['Pseudo']) ?></a>
-							<a href="deconnexion.php" class="button">Déconnexion</a>
-							<?php
-						}
-					?>
-					
-           		</div>
-			</div>
-			<div class="menu haut">
-				<a href="administrateur.php" class="button2">Espace Administrateur</a>
-				<a href="gestionmembres.php" class="button2">Gestion Membres</a>
-				<a href="gestiongroupes.php" class="button2">Gestion Groupes</a>
-				<a href="forumadmin.php" class="button2">Gestion Forum</a>
-				<a href="faqadmin.php" class="button2">Gestion FAQ</a>
-			</div> 			
-		</header>
+		<?php include("headeradmin.php") ?>
 
 
 		<div class="modificationdiv">
             <h3>Modification des informations du membre :</h3>
             <form action="pagemutablemembreadmin.php" method="post">
-            	<div class="partie colonnegauche">
-            		Pseudo :<br/>
-            		Prénom :<br/>
-            		Nom :<br/>
-            		Mail :<br/>
-            		Adresse :<br/>
-            		Ville :<br/>
-            		Date de naissance :<br/>
-            		Photo :<br/>
-            	</div>
-
+            	
             	<?php
 				try
 					{
@@ -110,20 +53,33 @@
 	        			die('Erreur : '.$e->getMessage());
 					}
 
-				$reponse = $base->query('SELECT Pseudo, Nom, Prenom, Date_naissance, Mail, Adresse, Ville, Photo FROM Membre_inscrit WHERE Pseudo="'.$_GET['Pseudomembre'].'"');
+				$reponse = $base->query('SELECT Pseudo, Nom, Prenom, Date_naissance, Mail, Adresse, Ville, Photo, Administrateur FROM Membre_inscrit WHERE Pseudo="'.$_GET['Pseudomembre'].'"');
 				$donnees=$reponse->fetch();
 				?>
 
-            	<div class="partie colonnedroite">
-            		<input type="text" name="login" value="<?php echo $donnees['Pseudo'] ?>"><br />
-		            <input type="text" name="prenom" value="<?php echo $donnees['Prenom'] ?>"><br />
-		            <input type="text" name="nom" value="<?php echo $donnees['Nom'] ?>"><br />
-		            <input type="text" name="mail" value="<?php echo $donnees['Mail'] ?>"><br />
-		            <input type="text" name="adresse" value="<?php echo $donnees['Adresse'] ?>"><br />
-		            <input type="text" name="ville" value="<?php echo $donnees['Ville'] ?>"><br />
-		            <input type="date" name="naissance" value="<?php echo $donnees['Date_naissance'] ?>"><br />
-		            <input type="text" name="photo" value="<?php echo $donnees['Photo'] ?>"><br />
+            	<div class="apparenceformulaire">
+            		<label for="login">Pseudo : </label><input type="text" name="login" placeholder="Entrez un Pseudo" value="<?php echo $donnees['Pseudo'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="prenom">Prénom : </label><input type="text" name="prenom" placeholder="Entrez un prénom" value="<?php echo $donnees['Prenom'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="nom">Nom : </label><input type="text" name="nom" placeholder="Entrez un nom" value="<?php echo $donnees['Nom'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="mail">Mail : </label><input type="text" name="mail" placeholder="Entrez un mail" value="<?php echo $donnees['Mail'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="adresse">Adresse : </label><input type="text" name="adresse" placeholder="Entrez une adresse" value="<?php echo $donnees['Adresse'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="ville">Ville : </label><input type="text" name="ville" placeholder="Entrez une ville" value="<?php echo $donnees['Ville'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="naissance">Date de naissance : </label><input type="date" name="naissance" value="<?php echo $donnees['Date_naissance'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="photo">Photo : </label><input type="text" name="photo" placeholder="Entrez une photo" value="<?php echo $donnees['Photo'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br/>
             	</div>
+
+            	<?php
+		            	if ($donnees['Administrateur']==0){
+		            		?>
+		            			<label for="admincheckbox">Administrateur : </label><input type="checkbox" name="admincheckbox" value="admincheckbox">
+		            		<?php
+		            	}
+		            	else if ($donnees['Administrateur']==1){
+		            		?>
+		            			<label for="admincheckbox">Administrateur : </label><input type="checkbox" name="admincheckbox" value="admincheckbox" checked>
+		            		<?php
+		            	}
+		            ?><br/>
            
             	<input type="submit" name="valider" value="Valider" class="button3">
             	<input type="submit" name="supprimer" value="Supprimer le membre" class="button3">
@@ -134,32 +90,7 @@
         </div>
 
 
-		<footer>
-			<div class="company bas">
-				<h3>Company</h3>
-				<a href="groupe6c.php" class="lienfootercompany">A propos de nous</a>
-				<a href="cgu.php" class="lienfootercompany">CGU</a><br/>
-				<a href="accueilen.php" class="lienfootercompany">English version</a>
-			</div>
+		<?php include("footeradmin.php") ?>
 
-			<div class="espace bas">
-			</div>
-
-			<div class="contact bas">
-				<h3>Contact</h3>
-				<a href="mailto:tho-richard@sfr.fr" class="rsociaux mail"></a>
-				<a href="https://www.facebook.com" class="rsociaux fb"></a>
-				<a href="https://www.google.fr" class="rsociaux twitter"></a>
-				<a href="https://www.google.fr" class="rsociaux linkedin"></a>
-			</div>
-
-			<div class="espace bas">
-			</div>
-
-			<div class="adresse bas">
-				<h3>Adresse</h3>
-				<p>28 Rue Notre-Dame des Champs, Paris 75006.</p>
-			</div>
-		</footer>
 	</body>	
 </html>

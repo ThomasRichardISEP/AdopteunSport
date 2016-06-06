@@ -6,40 +6,21 @@
 	}
 	?>
 
-<?php
-			if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
-				try
-		        {
-		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		        }
-		        catch(Exception $e)
-		        {
-		            die('Erreur : '.$e->getMessage());
-		        }
-
-		        $req = $base->prepare('UPDATE groupe SET Titre = ?, Descriptif = ?, Zone_geographique = ?, Nb_max_personnes = ?, Photo = ?, Nom_sport = ?, Pseudo_membre_createur = ?, Date_creation = ? WHERE Titre= ? ');
-				$req->execute(array($_POST['titre'], $_POST['descriptif'], $_POST['zonegeo'], $_POST['nbpers'], $_POST['photo'], $_POST['nomsport'], $_POST['pseudocreateur'], $_POST['datecreation'], $_POST['titre']));
-
-		        header ('Location: membre.php');
-			}
-		?>
+<?php include_once("model.php"); ?>
 
 <?php
-			if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer le groupe') {
-				try
-		        {
-		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		        }
-		        catch(Exception $e)
-		        {
-		            die('Erreur : '.$e->getMessage());
-		        }
-
-		        $reponse = $base->query('DELETE FROM groupe WHERE Titre = "'.$_POST['titre'].'"');
-		        $reponse2 = $base->query('DELETE FROM appartenance_groupe WHERE Titre_groupe = "'.$_POST['titre'].'"');
-		        header ('Location: membre.php');
-		    }
+	if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
+		modifgroupeleader($_POST['titre'], $_POST['descriptif'], $_POST['zonegeo'], $_POST['nbpers'], $_POST['photo'], $_POST['nomsport'], $_POST['pseudocreateur'], $_POST['datecreation']);
+	}
 ?>
+
+<?php
+	if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer le groupe') {
+		supprimergroupeleader($_POST['titre']);
+	}
+?>
+
+<?php include("js.php"); ?>
 
 
 <!DOCTYPE html>
@@ -56,50 +37,11 @@
 	</head>
 	<body>
 
-		<header>
-			<div class="container haut">
-				<div class="connexion element"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
-				<div class="connexion droite element">
-					<?php
-						if (!isset($_SESSION['Pseudo'])) {
-							?>
-							<a href="inscription.php" class="button">Inscription</a>
-							<a href="pageconnection.php" class="button">Connexion</a>
-							<?php
-						}
-						else if (isset($_SESSION['Pseudo'])) {
-							?>
-							<a href="membre.php" class="lienpseudo"><?php echo($_SESSION['Pseudo']) ?></a>
-							<a href="deconnexion.php" class="button">Déconnexion</a>
-							<?php
-						}
-					?>
-					
-           		</div>
-			</div>
-			<div class="menu haut">
-				<a href="membre.php" class="button2">Profil</a>
-				<a href="clubs.php" class="button2">Club</a>
-				<a href="groupes.php" class="button2">Groupes</a>
-				<a href="forum.php" class="button2">Forum</a>
-				<a href="faq.php" class="button2">Aide</a>
-			</div> 			
-		</header>
-
+		<?php include("headermembre.php"); ?>
 
 		<div class="modificationdiv">
             <h3>Modification des informations du groupe :</h3>
             <form action="modifgroupeleader.php" method="post">
-            	<div class="partie colonnegauche">
-            		Titre :<br/>
-            		Descriptif :<br/>
-            		Nom du sport :<br/>
-            		Zone géographique :<br/>
-            		Nb max de personnes :<br/>
-            		Photo :<br/>
-            		Pseudo leader :<br/>
-            		Date création :<br/>
-            	</div>
 
             	<?php
 				try
@@ -115,15 +57,15 @@
 				$donnees=$reponse->fetch();
 				?>
 
-            	<div class="partie colonnedroite">
-            		<input type="text" name="titre" value="<?php echo $donnees['Titre'] ?>"><br />
-		            <input type="text" name="descriptif" value="<?php echo $donnees['Descriptif'] ?>"><br />
-		            <input type="text" name="nomsport" value="<?php echo $donnees['Nom_sport'] ?>"><br />
-		            <input type="text" name="zonegeo" value="<?php echo $donnees['Zone_geographique'] ?>"><br />
-		            <input type="text" name="nbpers" value="<?php echo $donnees['Nb_max_personnes'] ?>"><br />
-		            <input type="text" name="photo" value="<?php echo $donnees['Photo'] ?>"><br />
-		            <input type="text" name="pseudocreateur" value="<?php echo $donnees['Pseudo_membre_createur'] ?>"><br />
-		            <input type="date" name="datecreation" value="<?php echo $donnees['Date_creation'] ?>"><br />
+            	<div class="apparenceformulaire">
+            		<label for="titre">Titre : </label><input type="text" name="titre" placeholder="Entrez un titre" value="<?php echo $donnees['Titre'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="descriptif">Descriptif : </label><input type="text" name="descriptif" placeholder="Entrez un descriptif" value="<?php echo $donnees['Descriptif'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="nomsport">Nom du sport : </label><input type="text" name="nomsport" placeholder="Entrez un sport" value="<?php echo $donnees['Nom_sport'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="zonegeo">Zone géographique : </label><input type="text" name="zonegeo" placeholder="Entrez une ville" value="<?php echo $donnees['Zone_geographique'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="nbpers">Nb max de personnes : </label><input type="text" name="nbpers" placeholder="Entrez un nb de personnes" value="<?php echo $donnees['Nb_max_personnes'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="photo">Photo : </label><input type="text" name="photo" placeholder="Entrez une photo" value="<?php echo $donnees['Photo'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="pseudocreateur">Pseudo leader : </label><input type="text" placeholder="Entrez un pseudo leader" name="pseudocreateur" value="<?php echo $donnees['Pseudo_membre_createur'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
+		            <label for="datecreation">Date création : </label><input type="date" name="datecreation" value="<?php echo $donnees['Date_creation'] ?>" onclick="colorer(this)" onblur="decolorer(this)"><br />
             	</div>
            
             	<input type="submit" name="valider" value="Valider" class="button3">
@@ -170,53 +112,7 @@
 			$reponse->closeCursor();	
 		?>
 
+		<?php include("footermembre.php"); ?>
 
-
-		<footer>
-			<div class="company bas">
-				<h3>Company</h3>
-				<a href="groupe6c.php" class="lienfootercompany">A propos de nous</a>
-				<a href="cgu.php" class="lienfootercompany">CGU</a><br/>
-				<a href="accueilen.php" class="lienfootercompany">English version</a>
-			</div>
-
-			<div class="espace bas">
-			</div>
-
-			<div class="contact bas">
-				<h3>Contact</h3>
-				<a href="mailto:tho-richard@sfr.fr" class="rsociaux mail"></a>
-				<a href="https://www.facebook.com" class="rsociaux fb"></a>
-				<a href="https://www.google.fr" class="rsociaux twitter"></a>
-				<a href="https://www.google.fr" class="rsociaux linkedin"></a>
-			</div>
-
-			<div class="espace bas">
-			</div>
-
-			<div class="adresse bas">
-				<h3>Adresse</h3>
-				<p>28 Rue Notre-Dame des Champs, Paris 75006.</p>
-			</div>
-		</footer>
 	</body>	
 </html>
-
-
-
-
-<!--
-	if (isset($_POST['suppr']) && $_POST['suppr'] == 'Supprimer le membre') {
-						try
-				        {
-				            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-				        }
-				        catch(Exception $e)
-				        {
-				            die('Erreur : '.$e->getMessage());
-				        }
-
-				        $req = $base->prepare('DELETE FROM appartenance_groupe WHERE Titre_groupe = ? AND Pseudo_membre_inscrit = ? ');
-				        $req->execute(array($_GET['Titregroupe'], $donnees['Pseudo_membre_inscrit']));
-		   			}
-		-->
