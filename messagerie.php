@@ -6,7 +6,7 @@
 	}
 	?>
 
-<?php include("messagerie-model.php"); ?>
+<?php include("model.php"); ?>
 
 <?php
 			if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer') {
