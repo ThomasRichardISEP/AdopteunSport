@@ -8,6 +8,7 @@
 
 <?php include_once("model.php"); ?>
 
+<!-- Ajout d'un groupe par l'administrateur -->
 <?php
 	if (isset($_POST['creer']) && $_POST['creer'] == 'Créer') {
 		creergroupeadmin($_POST['nomgroupe'], $_POST['choixsport'], $_POST['choixville'], $_POST['descriptif'], $_POST['nbmembres'], $_POST['photo'], $_SESSION['Pseudo']);

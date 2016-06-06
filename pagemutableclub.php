@@ -1,55 +1,20 @@
 <?php
 session_start();
+include_once("model.php");
+
 	$club = $_GET['Titreclub'];
 	if (isset($_POST['rejoindre']) && $_POST['rejoindre'] == 'Rejoindre') {
-
-		try
-			{
-			    $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-			}
-			catch(Exception $e)
-			{
-			    die('Erreur : '.$e->getMessage());
-			}
-
-		$req = $base->prepare('SELECT count(*) FROM appartenance_club WHERE Pseudo_membre_inscrit = ? AND Titre_club = ? ');
-		$req->execute(array($_SESSION['Pseudo'], $club));
-		$data = $req->fetch();
-
-		if ($data[0] == 0) {
-			$sql = 'INSERT INTO appartenance_club(Pseudo_membre_inscrit, Titre_club, Date_inscription) VALUES("'.$_SESSION['Pseudo'].'", "'.$club.'", CURDATE())';
-			$base->query($sql);
-		}
+		rejoindreclub($_SESSION['Pseudo'], $club);
 	}
 
 
 	if (isset($_POST['desinscription']) && $_POST['desinscription'] == 'Desinscription') {
-		try
-			{
-			    $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-			}
-			catch(Exception $e)
-			{
-			    die('Erreur : '.$e->getMessage());
-			}
-
-		$req = $base->prepare('DELETE FROM appartenance_club WHERE Pseudo_membre_inscrit = ? AND Titre_club = ? ');
-		$req->execute(array($_SESSION['Pseudo'], $club));
+		quitterclub($_SESSION['Pseudo'], $club);
 	}
 
 
 	if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer') {
-		try
-			{
-			    $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-			}
-			catch(Exception $e)
-			{
-			    die('Erreur : '.$e->getMessage());
-			}
-
-		$req = $base->prepare('INSERT INTO avisclub(Commentaire, Note, Pseudo_membre, Club) VALUES (?, ?, ?, ?)' );
-		$req->execute(array($_POST['commentaire'], $_POST['note'], $_SESSION['Pseudo'], $club));
+		commenterclub($_POST['commentaire'], $_POST['note'], $_SESSION['Pseudo'], $club);
 	}
 ?>
 

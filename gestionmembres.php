@@ -8,6 +8,7 @@
 
 <?php include_once("model.php"); ?>
 
+<!-- Ajout d'un membre par l'administrateur -->
 <?php
 if (isset($_POST['ajouter']) && $_POST['ajouter'] == 'Ajouter') {
     ajoutermembreadmin($_POST['login'], $_POST['pass'], $_POST['pass_confirm'], $_POST['nom'], $_POST['prenom'], $_POST['photo'], $_POST['naissance'], $_POST['mail'], $_POST['adresse'], $_POST['ville'], $_POST['cgucheckbox']);

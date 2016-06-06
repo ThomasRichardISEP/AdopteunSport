@@ -41,6 +41,7 @@
 
 				$reponse2 = $base->prepare('SELECT Nom_event, Groupe, Club, Date_event, Heure_event FROM evenement WHERE Groupe = ? ORDER BY Date_event ');
 				$reponse2->execute(array($donnees['Titre_groupe']));
+
 				while ($donnees2 = $reponse2->fetch()){
 					?>
 					<div class="membrestrouves">
@@ -56,8 +57,7 @@
 					</div>
 					<?php
 				}
-				$reponse2->closeCursor();
-				
+
 			}
 
 			$reponse->closeCursor();	

@@ -9,10 +9,9 @@ catch(Exception $e)
         die('Erreur : '.$e->getMessage());
 }
 
-// Insertion du message à l'aide d'une requête préparée
+// Insertion de la question/réponse à l'aide d'une requête préparée
 $req = $bdd->prepare('INSERT INTO faq (Question, Reponse) VALUES(?, ?)');
 $req->execute(array($_POST['Question'], $_POST['Reponse']));
 
-// Redirection du visiteur vers la page du minichat
 header('Location: faqadmin.php');
 ?>

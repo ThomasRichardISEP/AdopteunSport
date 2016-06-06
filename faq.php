@@ -37,7 +37,7 @@ session_start();
 		while ($donnees = $reponse->fetch())
 		{ ?>
 
-			<div class="posts">
+			<div class="posts" onclick="affiche_div()">
 			<div class="question case">
 				<?php 
 				echo $donnees['Question'];
@@ -68,7 +68,7 @@ session_start();
 					$(this).next().slideToggle(); //slideToggle pour passer à la question d'en dessous
 				})
 			})
-		</script>
+		</script> 
 
 		<?php include("footermembre.php"); ?>
 		

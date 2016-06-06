@@ -8,12 +8,11 @@
 
 <?php include("model.php"); ?>
 
+<!-- Envoi d'un message instantané -->
 <?php
 			if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer') {
 				if ((isset($_POST['prenomdestinataire']) && !empty($_POST['prenomdestinataire'])) && (isset($_POST['nomdestinataire']) && !empty($_POST['nomdestinataire']))) {
-
 					envoyermsg($_SESSION['Prenom'], $_SESSION['Nom'], $_POST['prenomdestinataire'], $_POST['nomdestinataire'], $_POST['message']);
-
 	        	}
 	        	header ('Location: messagerie.php');
 	        }
@@ -96,19 +95,3 @@
 		
 	</body>
 </html>
-
-
-
-<!--
-try
-	        		{
-	            		$base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-	        		}
-	        		catch(Exception $e)
-	        		{
-	            		die('Erreur : '.$e->getMessage());
-	        		}
-
-	        		$sql = 'INSERT INTO messagerie(Prenomauteur, Nomauteur, Prenomdestinataire, Nomdestinataire, Message) VALUES("'.$_SESSION['Prenom'].'", "'.$_SESSION['Nom'].'", "'.$_POST['prenomdestinataire'].'", "'.$_POST['nomdestinataire'].'","'.$_POST['message'].'")';
-	        		$base->query($sql);
-	        		-->

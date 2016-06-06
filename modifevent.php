@@ -8,12 +8,14 @@
 
 <?php include_once("model.php"); ?>
 
+<!-- Validation de la modification de l'évènement -->
 <?php
 	if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
 		modifevent($_POST['nom'], $_POST['club'], $_POST['daterdv'], $_POST['heure']);
 	}
 ?>
 
+<!-- Suppression de l'évènement -->
 <?php
 	if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer l\'évènement') {
 		supprierevent($_POST['nom']);

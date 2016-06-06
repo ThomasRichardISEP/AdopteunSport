@@ -12,6 +12,10 @@
 	if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
 		modifmembre($_POST['login'], $_POST['old_pass'], $_POST['pass'], $_POST['pass_confirm'], $_POST['prenom'], $_POST['nom'], $_POST['mail'], $_POST['adresse'], $_POST['ville'], $_POST['naissance'], $_POST['photo'], $_SESSION['Pseudo']);
 	}
+
+	if (isset($_POST['effacer']) && $_POST['effacer'] == 'Effacer mon compte') {
+		supprimercompte($_SESSION['Pseudo']);
+	}
 ?>
 
 <?php include("js.php"); ?>
@@ -51,6 +55,7 @@
             	</div>
            
             	<input type="submit" name="valider" value="Valider" class="button3">
+            	<input type="submit" name="effacer" value="Effacer mon compte" class="button3">
             </form>
             <?php
                 if (isset($erreur)) echo '<br />',$erreur;
@@ -61,39 +66,3 @@
 		
 	</body>
 </html>
-
-<!--
-try
-		        {
-		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		        }
-		        catch(Exception $e)
-		        {
-		            die('Erreur : '.$e->getMessage());
-		        }
-
-		        $req = $base->prepare('UPDATE membre_inscrit SET Pseudo = ?, Prenom = ?, Nom = ?, Mail = ?, Adresse = ?, Ville = ?, Date_naissance = ?, Photo = ? WHERE Pseudo = ? ');
-				$req->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['mail'], $_POST['adresse'], $_POST['ville'], $_POST['naissance'], $_POST['photo'], $_SESSION['Pseudo']));
-
-				$_SESSION['Pseudo'] = $_POST['login'];
-		        $_SESSION['Nom'] = $_POST['nom'];
-		        $_SESSION['Prenom'] = $_POST['prenom'];
-		        $_SESSION['Photo'] = $_POST['photo'];
-		        $_SESSION['Date_naissance'] = $_POST['naissance'];
-		        $_SESSION['Mail'] = $_POST['mail'];
-		        $_SESSION['Adresse'] = $_POST['adresse'];
-		        $_SESSION['Ville'] = $_POST['ville'];
-
-		        if ((isset($_POST['old_pass']) && md5($_POST['old_pass']) == $_SESSION['Mdp']) && (isset($_POST['pass']) && !empty($_POST['pass'])) && (isset($_POST['pass_confirm']) && !empty($_POST['pass_confirm'])) ) {
-		        	if ($_POST['pass'] == $_POST['pass_confirm']) {
-
-		        		$req = $base->prepare('UPDATE membre_inscrit SET mdp = ? WHERE Pseudo = ? ');
-		        		$req->execute(array(md5($_POST['pass']), $_SESSION['Pseudo']));
-
-		        		$_SESSION['Mdp'] = md5($_POST['pass']);
-		        	}
-		        }
-
-		        header ('Location: membre.php');
-
-		        -->

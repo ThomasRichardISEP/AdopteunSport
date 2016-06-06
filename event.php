@@ -8,6 +8,7 @@
 
 <?php include_once("model.php"); ?>
 
+<!-- Création évènement par le leader -->
 <?php
 	if (isset($_POST['creer']) && $_POST['creer'] == 'Créer') {
 		creerevent($_POST['nom'], $_GET['Groupe'], $_POST['club'], $_POST['daterdv'], $_POST['heure']);			    

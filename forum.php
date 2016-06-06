@@ -46,7 +46,7 @@ session_start();
 			// Récupération des messages
 			$reponse = $bdd->query('SELECT Pseudo_membre_inscrit, Contenu, Date_message, Heure_message FROM messages ORDER BY Id_message DESC ');
 
-			// Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
+			// Affichage de chaque message
 			while ($donnees = $reponse->fetch())
 			{ ?>
 

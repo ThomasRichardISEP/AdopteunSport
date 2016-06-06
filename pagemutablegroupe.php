@@ -34,6 +34,7 @@ include_once("model.php");
 
 		
 		<div class="detailgroupe">
+			<div class="profilcolonne">
 			<h3><?php echo $_GET['Titregroupe']; ?></h3>
 			<?php
 				try
@@ -45,7 +46,7 @@ include_once("model.php");
 	        			die('Erreur : '.$e->getMessage());
 					}
 
-				$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique, Nb_max_personnes, Pseudo_membre_createur, Date_creation FROM groupe WHERE Titre="'.$_GET['Titregroupe'].'"');
+				$reponse = $base->query('SELECT Titre, Descriptif, Zone_geographique, Nb_max_personnes, Pseudo_membre_createur, Date_creation, Photo FROM groupe WHERE Titre="'.$_GET['Titregroupe'].'"');
 
 				while ($donnees = $reponse->fetch())
 					{ ?>
@@ -55,6 +56,7 @@ include_once("model.php");
 						<p>Ce groupe est dirigé par <?php echo $donnees['Pseudo_membre_createur']; ?>.</p>
 						<p>Ce groupe a été créé le <?php echo $donnees['Date_creation']; ?>.</p>
 					<?php
+					$photo = $donnees['Photo'];
 					}
 
 					$reponse->closeCursor();
@@ -81,6 +83,8 @@ include_once("model.php");
 			?>
 			<P><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=pagemutablegroupe.php?Titregroupe=<?php echo $_GET['Titregroupe']; ?>"><img class="lienpartage" src="Images/fbshare.png" /></a>
 			<a target="_blank" href="https://twitter.com/home?status=pagemutablegroupe.php?Titregroupe=%3C?php%20echo%20$_GET%5B'Titregroupe'%5D;%20?%3E"><img class="lienpartage" src="Images/twittershare.png" /></a></p>
+		</div>
+		<img class="profilphoto profilcolonne" src=<?php echo $photo; ?> />
 		</div>
 
 

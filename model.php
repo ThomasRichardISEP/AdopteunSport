@@ -583,5 +583,80 @@ function creerclub($nom, $sport, $ville, $descriptif, $nbpers, $photo, $pseudo){
 }
 
 
+function rejoindreclub($pseudo, $club){
+	try
+			{
+			    $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+			    die('Erreur : '.$e->getMessage());
+			}
+
+		$req = $base->prepare('SELECT count(*) FROM appartenance_club WHERE Pseudo_membre_inscrit = ? AND Titre_club = ? ');
+		$req->execute(array($pseudo, $club));
+		$data = $req->fetch();
+
+		if ($data[0] == 0) {
+			$sql = 'INSERT INTO appartenance_club(Pseudo_membre_inscrit, Titre_club, Date_inscription) VALUES("'.$pseudo.'", "'.$club.'", CURDATE())';
+			$base->query($sql);
+		}
+}
+
+
+function quitterclub($pseudo, $club){
+	try
+			{
+			    $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+			    die('Erreur : '.$e->getMessage());
+			}
+
+		$req = $base->prepare('DELETE FROM appartenance_club WHERE Pseudo_membre_inscrit = ? AND Titre_club = ? ');
+		$req->execute(array($pseudo, $club));
+}
+
+
+function commenterclub($commentaire, $note, $pseudo, $club){
+	try
+			{
+			    $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+			    die('Erreur : '.$e->getMessage());
+			}
+
+		$req = $base->prepare('INSERT INTO avisclub(Commentaire, Note, Pseudo_membre, Club) VALUES (?, ?, ?, ?)' );
+		$req->execute(array($commentaire, $note, $pseudo, $club));
+}
+
+
+function supprimercompte($pseudo){
+	try
+			{
+			    $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
+			}
+			catch(Exception $e)
+			{
+			    die('Erreur : '.$e->getMessage());
+			}
+
+		$req = $base->prepare('DELETE FROM membre_inscrit WHERE Pseudo = ? ');
+		$req->execute(array($pseudo));
+
+		$req2 = $base->prepare('DELETE FROM appartenance_club WHERE Pseudo_membre_inscrit = ? ');
+		$req2->execute(array($pseudo));
+
+		$req3 = $base->prepare('DELETE FROM appartenance_groupe WHERE Pseudo_membre_inscrit = ? ');
+		$req3->execute(array($pseudo));
+
+		session_unset();
+		session_destroy();
+		header('Location: index.php');
+}
+
 
 ?>

@@ -8,12 +8,14 @@
 
 <?php include_once("model.php"); ?>
 
+<!-- Validation de la modification du groupe par l'administrateur -->
 <?php
 	if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
 		updategroupeadmin($_POST['titre'], $_POST['descriptif'], $_POST['zonegeo'], $_POST['nbpers'], $_POST['photo'], $_POST['nomsport'], $_POST['pseudocreateur'], $_POST['datecreation']);
 	}
 ?>
 
+<!-- Suppression d'un groupe par l'administrateur -->
 <?php
 	if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer le groupe') {
 		supprimergroupeadmin($_POST['titre']);

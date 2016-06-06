@@ -8,6 +8,7 @@
 
 <?php include_once("model.php"); ?>	
 
+<!-- Suppression d'un message sur le forum -->
 <?php
 	if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer le message') {
 		supprimerpost($_GET['Idmessage']);
@@ -43,21 +44,3 @@
 
 	</body>
 </html>
-
-
-<!--
-
-	try
-		        {
-		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		        }
-		        catch(Exception $e)
-		        {
-		            die('Erreur : '.$e->getMessage());
-		        }
-
-		        $reponse = $base->prepare('DELETE FROM messages WHERE Id_message = ? ');
-		        $reponse->execute(array($_GET['Idmessage']));
-		        header ('Location: forumadmin.php');
-
-		       -->

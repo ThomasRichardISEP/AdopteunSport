@@ -8,12 +8,14 @@
 
 <?php include_once("model.php"); ?>
 
+<!-- Validation de la modification des infos d'un membre par l'administrateur -->
 <?php
 	if (isset($_POST['valider']) && $_POST['valider'] == 'Valider') {
 		updatemembreadmin($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['mail'], $_POST['adresse'], $_POST['ville'], $_POST['naissance'], $_POST['photo']);
 	}
 ?>
 
+<!-- Suppression d'un membre du site -->
 <?php
 	if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer le membre') {
 		supprimermembreadmin($_POST['login']);

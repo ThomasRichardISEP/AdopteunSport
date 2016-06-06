@@ -8,6 +8,7 @@
 
 <?php include_once("model.php"); ?>
 
+<!-- Suppression question dans le fas -->
 <?php
 	if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer la question') {
 		supprimerfaq($_GET['Idquestion']);
@@ -42,19 +43,3 @@
 
 	</body>
 </html>
-
-
-<!--
-	try
-		        {
-		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		        }
-		        catch(Exception $e)
-		        {
-		            die('Erreur : '.$e->getMessage());
-		        }
-
-		        $reponse = $base->prepare('DELETE FROM faq WHERE Id = ? ');
-		        $reponse->execute(array($_GET['Idquestion']));
-		        header ('Location: faqadmin.php');
-		        -->

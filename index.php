@@ -18,9 +18,7 @@ session_start();
 
 	<?php include("headermembre.php"); ?>
 
-	<div class="videodiv">
-		<video class="video" src="adopteunsport.mp4" controls></video>
-	</div>
+	<video class="video" src="adopteunsport.mp4" controls></video>
 
 	<?php include("footermembre.php"); ?>
 

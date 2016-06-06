@@ -22,8 +22,10 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 
     <body>
     	<header>
-            <div class="container">
-                <div class="connexion"><a href="index.php"><img class="logosite" src="Images/adopteunsportnb.png" /></a></div>
+            <div class="block">
+                <div class="sousblock1">
+                    <a href="index.php"><img class="imagesite" src="Images/adopteunsportnb.png" /></a>
+                </div>
             </div>
         </header>
 

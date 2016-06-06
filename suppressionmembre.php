@@ -8,6 +8,7 @@
 
 <?php include_once("model.php"); ?>
 
+<!-- Suppression d'un membre d'un groupe -->
 <?php
 	if (isset($_POST['supprimer']) && $_POST['supprimer'] == 'Supprimer le membre') {
 		supprimermembre($_GET['Titregroupe'] ,$_GET['Pseudomembre']);
@@ -43,20 +44,3 @@
 
 	</body>	
 </html>
-
-
-<!--
-
-	try
-		        {
-		            $base = new PDO('mysql:host=localhost;dbname=app_info;charset=utf8', 'root', '');
-		        }
-		        catch(Exception $e)
-		        {
-		            die('Erreur : '.$e->getMessage());
-		        }
-
-		        $reponse = $base->prepare('DELETE FROM appartenance_groupe WHERE Titre_groupe = ? AND Pseudo_membre_inscrit = ? ');
-		        $reponse->execute(array($_GET['Titregroupe'] ,$_GET['Pseudomembre']));
-		        header ('Location: membre.php');
-		        -->
